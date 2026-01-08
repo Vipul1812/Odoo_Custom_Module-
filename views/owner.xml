@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Tree View -->
+    <record id="tree_view_owner" model="ir.ui.view">
+        <field name="name">tree.view.owner</field>
+        <field name="model">owner</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="Properties_info"/>
+                <field name="name"/>
+                <field name="contact_info"/>
+                <field name="shared_property_ids"/>
+            </tree>
+        
+        </field>
+           </record>
+
+    <!-- Form view -->
+    <record id="form_view_owner" model="ir.ui.view">
+        <field name="name">form.view.owner</field>
+        <field name="model">owner</field>
+        <field name="arch" type="xml">
+            <form>
+
+                    <sheet>
+                        <group>
+                            <field name="Properties_info"/>
+                            <field name="name"/>
+                            <field name="contact_info"/>
+                            <field name="shared_property_ids"/>
+                        </group>
+
+                    </sheet>
+                
+            </form>
+        </field>
+    </record>
+
+    <record  id="action_owner" model="ir.actions.act_window">
+        <field name="name">Owner</field>
+        <field name="res_model">owner</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+
+    <menuitem id="menu_owner"
+        name = "Propertires owner"/>
+
+    <menuitem 
+        id="sub_menu_owner"
+        name="Owner"
+        parent="menu_owner"
+        action="action_owner"/>
+
+
+
+
+</odoo>
