@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Tree View -->
+    <record id="tree_view_enquiry" model="ir.ui.view">
+        <field name="name">tree.view.enquiry</field>
+        <field name="model">properties.enquiry.wizard</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="property_type"/>
+                <field name="person_name"/>
+                <field name="person_email"/>
+                <field name="contact_number"/>
+                <field name="enquiry_message"/>     
+            </tree>
+        
+        </field>
+    </record>
+
+    <!-- Form view -->
+    <record id="form_view_enquiry" model="ir.ui.view">
+        <field name="name">form.view.enquiry</field>
+        <field name="model">properties.enquiry.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+
+                    <sheet>
+                        <group>
+                            <field name="property_type"/>
+                            <field name="person_name"/>
+                            <field name="person_email"/>
+                            <field name="contact_number"/>
+                            <field name="enquiry_message"/>
+                        </group>
+                    </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record  id="action_enquiry" model="ir.actions.act_window">
+        <field name="name">Enquiry</field>
+        <field name="res_model">properties.enquiry.wizard</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+
+
+    <menuitem 
+        id="sub_menu_enquiry"
+        name="Enquiry"
+        parent="menu_estate_root"
+        action="action_enquiry"/>
+
+
+
+</odoo>

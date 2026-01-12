@@ -5,6 +5,7 @@ class EstateProperty(models.Model):
     _name = "estate.property"
     _description = "Real estate Property"
 
+
     name = fields.Char(string="Property Name", required=True, size=50)
     postcode = fields.Integer(string="Postcode", required=True, help="Postal area", size=5)
     date_available = fields.Date(string="Available From")
@@ -46,7 +47,9 @@ class EstateProperty(models.Model):
             'view_mode': 'form',
             'target': 'new',
         }
-    
+    def _compute_display_name(self):
+        for rec in self:
+            rec.display_name = f"{rec.name}  {rec.postcode}"
 
 
 

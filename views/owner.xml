@@ -9,7 +9,10 @@
                 <field name="Properties_info"/>
                 <field name="name"/>
                 <field name="contact_info"/>
+                <field name="date_of_birth"/>
+                <field name="age"/>
                 <field name="shared_property_ids"/>
+                <field name="reference_field"/>
             </tree>
         
         </field>
@@ -21,16 +24,24 @@
         <field name="model">owner</field>
         <field name="arch" type="xml">
             <form>
-
-                    <sheet>
-                        <group>
-                            <field name="Properties_info"/>
-                            <field name="name"/>
-                            <field name="contact_info"/>
-                            <field name="shared_property_ids"/>
-                        </group>
-
-                    </sheet>
+                <sheet>
+                    <notebook>
+                        <page string="Personal Info" class="oe_highlight">
+                            <group>
+                                <field name="name"/>
+                                <field name="contact_info"/>
+                                <field name="date_of_birth"/>
+                                <field name="age"/>
+                            </group>
+                        </page>
+                        <page string="Property Info" class="oe_highlight">
+                            <group>
+                                <field name="shared_property_ids"/>
+                                <field name="reference_field"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
                 
             </form>
         </field>

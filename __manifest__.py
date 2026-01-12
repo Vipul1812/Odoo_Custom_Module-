@@ -9,6 +9,7 @@
         "security/ir.model.access.csv",
         "views/estate_property.xml",
         "views/owner.xml",
+        "views/enquiry.xml",
         "wizard/property_enquiry.xml",
     ],
     "installable": True,

@@ -1,6 +1,6 @@
 
-from odoo import fields, models
-
+from odoo import fields, models , api
+from datetime import date
 
 class Owner(models.Model):
     _name = "owner"
@@ -14,6 +14,8 @@ class Owner(models.Model):
 
     name = fields.Char(string="Name", size=20)
     contact_info = fields.Integer(string="Contact Info")
+    date_of_birth = fields.Datetime(string="Date of Birth")
+    age = fields.Integer(string="Age", compute='_compute_age', inverse='_inverse_age', tracking=True ,store=True) 
 
     shared_property_ids = fields.Many2many(
         'estate.property',
@@ -22,7 +24,27 @@ class Owner(models.Model):
         'property_id',
         string="Shared Properties"
     )
-    
+
+    reference_field = fields.Reference(selection=[('estate.property', 'Property')],string="Property Postcode Id")
+
+    @api.depends('date_of_birth')
+    def _compute_age(self):
+        for rec in self:
+            today= date.today()
+            if rec.date_of_birth:
+                rec.age = today.year - rec.date_of_birth.year
+            else:
+                rec.age = 0
+
+    @api.depends('age')
+    def _inverse_age(self):
+        for rec in self:
+            today= date.today()
+            if rec.age:
+                rec.date_of_birth = date(today.year - rec.age, today.month, today.day)
+            else:
+                rec.date_of_birth = False
+
     def _compute_display_name(self):
         for rec in self:
             rec.display_name = f"{rec.name}  {rec.contact_info}"
