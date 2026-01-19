@@ -57,7 +57,6 @@ class EstateProperty(models.Model):
     bedrooms = fields.Integer(string='Bedrooms')
     living_area = fields.Integer(string='Living Area(sqm)')
     garage = fields.Boolean(string='Garage')
-    garden = fields.Boolean(string='Garden')
     
     # Assuming 'owner' is another model name you've defined
     owners_list = fields.Many2one('owner', string='Primary Owner')
@@ -68,7 +67,20 @@ class EstateProperty(models.Model):
         'owner_id', 
         string='Shared Owners'
     )
+
+
+    garden = fields.Boolean(string='Garden',)
+    garden_message = fields.Char(string='Garden Status Message')
     
+    @api.onchange('garden')
+    def _onchange_garden(self):
+        if self.garden:
+            self.garden_message = "The record is now active."
+        else:
+            self.garden_message = "The record is now inactive."
+
+
+
     def edit_button(self):
         pass
 
@@ -93,6 +105,7 @@ class EstateProperty(models.Model):
 class EstatePropertyOffer(models.Model):
     _name = "estate.property.offer"
     _description = "Property offer on different property"
+    _rec_name="owner_id"
     
 
     owner_id = fields.Many2one('owner',string="Owner")
@@ -141,3 +154,39 @@ class EstatePropertyOffer(models.Model):
                 rec.owner_contact = rec.owner_id.contact_info
             else:
                 rec.owner_contact = 0
+
+    
+    def reads_grouping(self):
+        # rec = self.env['estate.property.offer'].read_group( domain=[('person_gender','=','male')], fields=['total_price:sum(price)'], groupby=['person_gender'])
+        # # print("Grouped Records:", rec)
+        # print("--------------------------------------------------")
+        
+        rec = self.env['sale.order'].read_group(domain=[],
+                                                 fields=['amount_total:sum'],
+                                                 groupby=['date_order:month'],
+                                                 )
+        
+        
+        print("-----------------------------------Grouped Records:")
+        for record in rec:
+            print("Group Record:", record)
+
+
+    def read_search_read(self):
+        rec = self.env['estate.property.offer'].search_read(domain=[('price','>',5000)], fields=['owner_id','price'] , limit  = 10 , offset=0 , order='price desc' )
+        
+        
+        print("-----------------------------------Search Read Records:")
+        for record in rec:
+            print("Search Read Record:", record) 
+
+        
+
+
+
+
+# class SaleOrder(models.Model):
+#    _inherit = 'sale.order'
+
+
+#    postcode = fields.Char(string="Customer Postcode")

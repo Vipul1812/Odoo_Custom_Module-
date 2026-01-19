@@ -6,16 +6,32 @@ class Owner(models.Model):
     _description = "Owner Portal"
     
 
-    Properties_info = fields.One2many(
-        'estate.property',
-        'owners_list'
-    )
+
+    serial_no = fields.Integer(
+    string="S.No.",
+    compute="_compute_serial_no",
+    store=False)
+
+
+    parent_id = fields.Many2one(
+        'owner',
+        string="Parent Owner")
+    
+    child_ids = fields.One2many("owner", "parent_id", string="Child Owners")
+
+
+
+    # property_ids = fields.One2many(
+    #     'estate.property',
+    #     'owners_list',
+    #     string="Owned Properties"
+    # )
+    
 
     name = fields.Char(string="Name", size=20)
-    contact_info = fields.Integer(string="Contact Info")
+    contact_info = fields.Integer(string="Contact Info" , copy=False , default=98877456)
     date_of_birth = fields.Datetime(string="Date of Birth")
-    age = fields.Integer(string="Age", compute='_compute_age', inverse='_inverse_age', tracking=True ,store=True) 
-    
+    age = fields.Integer(string="Age", compute='_compute_age', inverse='_inverse_age', tracking=True ,store=True ) 
 
     shared_property_ids = fields.Many2many(
         'estate.property',
@@ -26,6 +42,14 @@ class Owner(models.Model):
     )
 
     reference_field = fields.Reference(selection=[('estate.property', 'Property')],string="Property Postcode Id")
+
+
+    def _compute_serial_no(self):
+            serial = 1
+            records = self.search([], order='id')
+            for rec in records:
+                rec.serial_no = serial
+                serial += 1
 
     @api.depends('date_of_birth')
     def _compute_age(self):
@@ -46,17 +70,91 @@ class Owner(models.Model):
 
     def _compute_display_name(self):
         for rec in self:
-            rec.display_name = f"{rec.name}  {rec.contact_info}"
+            rec.display_name = f"{rec.name}"
+
+
+
+# ########################################################   ORM METHODS  ########################################################
+
+#     @api.model_create_multi
+#     def create(self, values):
+#         rec = super(Owner, self).create(values)
+#         print(f"------------------------------Record Created: {rec , values}*************------------------------")
+#         return rec
     
 
-    @api.model_create_multi
-    def create(self, values):
-        rec = super(Owner, self).create(values)
-        print(f"------------------------------Record Created: {rec , values}*************------------------------")
-        return rec
+
+    # def custom_button(self):
+    #     self.env['owner'].create({
+    #     'name': 'Button clicked!'
+    #     })
+
+    
+
+#     def write(self, values):
+#         print("Write Method Called")
+#         res =super(Owner , self).write(values)
+#         print(f"------------------------------Record Updated: {self , values}*************------------------------")
+#         return res
+
+
+#     def custom_write(self):
+#         print("Custom Write Method Called")
+#         # self.update({'name':'Updated Name from Custom Write Method'})
+#         # self.write({'name':'Updated Name from Custom Write Method'})
+
+#         record = self.search([], limit=10)
+#         # record.write({'age':55})
+#         for rec in record:
+#             rec.write({'age':rec.id})
+#         print(f"------------------------------Record Updated: {record}*************------------------------")
+
+
+    def duplicate_record(self):
+        print("Duplicate Method Called")
+        new_record = self.copy({'name': f'copy of {self.name}'})
+        print(f"------------------------------Record Duplicated: {new_record}*************------------------------")
+
+
+    @api.returns('self', lambda rec: rec.id)
+    def copy(self, default=None):
+        rec = super(Owner, self).copy(default=default)
+        return rec  
     
 
 
-    def custom_button(self):
-        data = {'name': 'Button clicked!'}
-        self.env['owner'].create(data)
+    def delete_record(self):
+        self.unlink()
+        print(f"------------------------------Record Deleted*************------------------------")
+
+
+    # def search_records(self):                                                               
+    #     # rec = self.env['owner'].search([],limit=1,offset =1)
+    #     # rec = self.env['estate.property'].search([('owners_list','child_of',132)], )
+    #     rec = self.env['estate.property'].search([('owners_list','not any',[('name','ilike','vipul')])]) 
+    #     print(f"------------------------------Records Found: {rec }*************------------------------")
+
+
+    
+    # def count_record(self):
+    #     count = self.env['owner'].search_count([])
+    #     print(f"------------------------------Records Counted: {count }*************------------------------")
+
+
+    def read_button(self):
+        rec = self.env['owner'].search([] , limit=2)
+        data = rec.read(['name','contact_info'])
+        print(f'------------------------------Records Read: {data}*************------------------------')
+
+
+
+
+
+
+
+
+
+
+
+
+

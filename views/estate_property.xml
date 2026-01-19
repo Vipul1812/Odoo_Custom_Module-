@@ -10,8 +10,11 @@
             <header>
                     <button name="edit_button" string="Edit" type='object' class="oe_highlight" display="always"/>
                     <button name="create_button" string="Create" type='object' class="oe_highlight" display="always"/>
-                   <button name="action_send_msg" string="Enquiry" type="object" class="oe_stat_button" />
+                   <button name="action_send_msg" string="Enquiry" type="object" class="oe_stat_button" display="always"/>
+
+                   
             </header>
+                <field name="id"/>
                 <field name="name"/>
                 <field name="postcode"/>
                 <field name="expected_price"/>
@@ -19,8 +22,9 @@
                 <field name="description"/>
                 <field name="bedrooms"/>
                 <field name="living_area"/>
-                <field name="garage"/>
-                <field name="garden"/>
+                <field name="garage" widget="boolean"/>
+                <field name="garden" widget="boolean_toggle"/>
+                <field name="garden_message"/>
                 <field name="owners_list"/>
                 <field name="shared_owner_ids"/>
             </tree>
@@ -59,8 +63,9 @@
                                 <field name="description"/>
                                 <field name="bedrooms"/>
                                 <field name="living_area"/>
-                                <field name="garage"/>
-                                <field name="garden"/>
+                                <field name="garage" widget="boolean"/>
+                                <field name="garden" />
+                                <field name="garden_message"/>
                             </group>
                         </page>
                         <page string="Owner_list">
@@ -104,9 +109,14 @@
         <field name="model">estate.property.offer</field>
         <field name="arch" type="xml">
             <tree>
+
+            <header>
+                <button name="reads_grouping" string="Group Read" type="object" class="oe_highlight" display="always"/>
+                <button name="read_search_read" string="Search Read" type="object" class="oe_highlight" display="always"/>
+            </header>
                 <field name="owner_id"/>
                 <field name="owner_contact"/>
-                <field name="person_gender"/>
+                <field name="person_gender" decoration-danger="person_gender == 'male'" decoration-success="person_gender == 'female'"/>
                 <field name="price"/>
                 
                 <field name="binary_file"/>
@@ -157,13 +167,34 @@
 
 
 
+    <record id="search_view_estate_property_offer" model="ir.ui.view">
+        <field name="name">estate.property.offer.search</field>
+        <field name="model">estate.property.offer</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="owner_id"/>
+                <field name="owner_contact"/>
+                <field name="price"/>
+                <field name="person_gender"/>
+                <field name="deadline_date"/>
+                <!-- <filter name="filter_high_value_offers" string="High Value Offers" domain="[('price','&gt;',100000)]"/> -->
+                <!-- <group expand="0" string="Group By">
+                    <field string="Owner" name="owner_id" context="{'group_by': 'owner_id'}"/>
+                </group> -->
+            </search>
+        </field>
+    </record>
+
+
      <!-- actions  -->
 
     <record id="actions_estate_property_offer" model="ir.actions.act_window"> 
         <field name="name">Offers</field>
         <field name="res_model">estate.property.offer</field>
-        <field name="view_mode">kanban,tree,form</field>
-         <field name="view_id" ref="estate_property__offer_tree_view"/> 
+        <field name="view_mode">tree,form,search,kanban</field>
+        <!-- <field name="view_id" ref="estate_property__offer_tree_view"/> -->
+        <!-- <field name="context">{'group_by':'owner_id'}</field> -->
+        
     </record>
 
      menu item
@@ -175,8 +206,19 @@
     /> 
 
 
+    <!-- #inherit the sale order to add postcode field   
+
+    <record id="view_sale_order_form_inherit_postcode" model="ir.ui.view">
+    <field name="name">sale.order.form.inherit.postcode</field>
+    <field name="model">sale.order</field>
+    <field name="inherit_id" ref="sale.view_order_form"/>
+    <field name="arch" type="xml">
+        <xpath expr="//field[@name='validity_date']" position="after">
+            <field name="postcode"/>
+        </xpath>
+    </field>
+    </record> -->
 
 
-        
 </odoo>
 

@@ -6,7 +6,17 @@
         <field name="model">owner</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="Properties_info"/>
+            <header>
+            <button name="delete_record" string="Delete Record" type="object" class="oe_highlight" display="always"/>
+            <!-- <button name="search_records" string="Search Records" type="object" class="oe_highlight" display="always"/>
+            <button name="count_record" string="Search Count" type="object" class="oe_highlight" display="always"/> -->
+            <button name="read_button" string="Read Records" type="object" class="oe_highlight" display="always"/>
+            
+            </header>
+                <field name="serial_no"/>
+                <field name="id"/>
+                <field name="child_ids"/>
+                <field name="parent_id"/>
                 <field name="name"/>
                 <field name="contact_info"/>
                 <field name="date_of_birth"/>
@@ -25,7 +35,11 @@
         <field name="arch" type="xml">
             <form>
             <header>
-                <button name="custom_button" string="Create Record" type="object" class="oe_highlight" />
+                <!-- <button name="custom_button" string="Create Record" type="object" class="oe_highlight" /> -->
+                <!-- <button name="custom_write" string="Custom Write" type="object" class="oe_highlight" />  -->
+                <!-- <button name="duplicate_record" string="Duplicate Record" type="object" class="oe_highlight" /> -->
+                <button name="delete_record" string="Delete Record" type="object" class="oe_highlight" />
+
             </header>
                 <sheet>
                     <notebook>
@@ -39,6 +53,8 @@
                         </page>
                         <page string="Property Info" class="oe_highlight">
                             <group>
+                                <field name="parent_id"/>
+                                <field name="child_ids"/>
                                 <field name="shared_property_ids"/>
                                 <field name="reference_field"/>
                             </group>
@@ -56,13 +72,12 @@
         <field name="view_mode">tree,form,kanban</field>
     </record>
 
-    <menuitem id="menu_owner"
-        name = "Propertires owner"/>
+   
 
     <menuitem 
         id="sub_menu_owner"
         name="Owner"
-        parent="menu_owner"
+        parent="menu_estate_root"
         action="action_owner"/>
 
 

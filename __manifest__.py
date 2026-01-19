@@ -4,15 +4,19 @@
     "summary": "Custom module for MyCompany",
     "category": "Custom",
     "author": "MyCompany",
-    "depends": ["base"],
+    "depends": ["base", "sale"],
     "data": [
         "security/ir.model.access.csv",
         "views/estate_property.xml",
         "views/owner.xml",
         "views/enquiry.xml",
         "wizard/property_enquiry.xml",
+
     ],
     "installable": True,
     "application": True,
     "license":'LGPL-3',
 }
+
+
+
