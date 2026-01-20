@@ -23,15 +23,18 @@ class Owner(models.Model):
 
     # property_ids = fields.One2many(
     #     'estate.property',
-    #     'owners_list',
-    #     string="Owned Properties"
-    # )
+    #     'owner_id',
+    #     string="Owned Properties")
     
 
     name = fields.Char(string="Name", size=20)
     contact_info = fields.Integer(string="Contact Info" , copy=False , default=98877456)
     date_of_birth = fields.Datetime(string="Date of Birth")
     age = fields.Integer(string="Age", compute='_compute_age', inverse='_inverse_age', tracking=True ,store=True ) 
+    gender = fields.Selection([
+        ('male',"Male"),
+        ('female',"Female")
+    ],string="Person's Gender" , help="Enter Your Gender")
 
     shared_property_ids = fields.Many2many(
         'estate.property',
@@ -146,9 +149,22 @@ class Owner(models.Model):
         data = rec.read(['name','contact_info'])
         print(f'------------------------------Records Read: {data}*************------------------------')
 
+    @api.model
+    def _name_search(self, name, domain=None, operator='ilike', limit=7, order=None ):
+        domain = ['|',('owner_id','ilike',name),('age','ilike',name)]
+        rec = self._search(domain, limit=limit, order=order)
+        print("------------------------------Name Search Records:", rec) 
 
-
-
+    @api.model
+    def _name_search(self, name='', domain=None, operator='ilike', limit=7, order=None ,):
+       
+        domain += [
+                '|',
+                ('name', operator, name),
+                ('age', '=', int(name)) ] if name.isdigit() else ('age', '=', -1)
+        print("------------------------------Name Search Domain:", domain)
+        return self._search(domain, limit=limit, order=order , )
+       
 
 
 

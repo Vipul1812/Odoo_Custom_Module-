@@ -23,6 +23,7 @@
                 <field name="age"/>
                 <field name="shared_property_ids"/>
                 <field name="reference_field"/>
+                <field name="gender"/>
             </tree>
         
         </field>
@@ -49,6 +50,7 @@
                                 <field name="contact_info"/>
                                 <field name="date_of_birth"/>
                                 <field name="age"/>
+                                <field name="gender"/>
                             </group>
                         </page>
                         <page string="Property Info" class="oe_highlight">
@@ -56,6 +58,7 @@
                                 <field name="parent_id"/>
                                 <field name="child_ids"/>
                                 <field name="shared_property_ids"/>
+
                                 <field name="reference_field"/>
                             </group>
                         </page>

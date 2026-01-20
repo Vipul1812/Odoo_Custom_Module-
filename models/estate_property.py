@@ -108,7 +108,7 @@ class EstatePropertyOffer(models.Model):
     _rec_name="owner_id"
     
 
-    owner_id = fields.Many2one('owner',string="Owner")
+    owner_id = fields.Many2one('owner',string="Owner" , context={'from_offer': True})
     owner_contact = fields.Integer(related='owner_id.contact_info', string ="Owner Contact Info", default=456789 )
 
     price = fields.Float(string="Price Value" , digits=(4,3), default=1000.567)
@@ -204,7 +204,8 @@ class EstatePropertyOffer(models.Model):
         print("------------------------------Default Get Method Res:", res)
         return res
 
-    def _name_search(self, name, domain=None, operator='ilike', limit=7, order="id asc" ):
+   
+    
 # class SaleOrder(models.Model):
 #    _inherit = 'sale.order'
 
