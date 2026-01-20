@@ -113,6 +113,7 @@
             <header>
                 <button name="reads_grouping" string="Group Read" type="object" class="oe_highlight" display="always"/>
                 <button name="read_search_read" string="Search Read" type="object" class="oe_highlight" display="always"/>
+                
             </header>
                 <field name="owner_id"/>
                 <field name="owner_contact"/>
@@ -135,6 +136,7 @@
         <field name="model">estate.property.offer</field>
         <field name="arch" type="xml">
             <form string="Offer">
+               
                 <sheet>
                     <group>
                         <group>

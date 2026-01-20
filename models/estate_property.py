@@ -109,9 +109,9 @@ class EstatePropertyOffer(models.Model):
     
 
     owner_id = fields.Many2one('owner',string="Owner")
-    owner_contact = fields.Integer(related='owner_id.contact_info', string ="Owner Contact Info", readonly=True)
+    owner_contact = fields.Integer(related='owner_id.contact_info', string ="Owner Contact Info", default=456789 )
 
-    price = fields.Float(string="Price Value" , digits=(4,3))
+    price = fields.Float(string="Price Value" , digits=(4,3), default=1000.567)
     # property_id = fields.Many2one('estate.property',string="Property")
     # partner_id = fields.Many2one('res.partner',string='Buyer')
 
@@ -181,10 +181,30 @@ class EstatePropertyOffer(models.Model):
             print("Search Read Record:", record) 
 
         
+    @api.model
+    def name_create(self, name):
+        rec = super(EstatePropertyOffer, self).name_create(name)
+        print("-------------------------------Name Created Record:-------------", rec)
+        return rec
+    
 
+    # @api.model
+    # def button_name_create(self, name):
+    #     rec = self.env['estate.property.offer'].create({
+    #         'owner_id': name,
+    #     })
+    #     print("--------------------------------Name Created Record:-------------", rec)
+    #     return rec
 
+    @api.model
+    def default_get(self, fields):
+        res = super(EstatePropertyOffer, self).default_get(fields)
+        res['price'] = 5000.567
+        res['person_gender'] ='male'
+        print("------------------------------Default Get Method Res:", res)
+        return res
 
-
+    def _name_search(self, name, domain=None, operator='ilike', limit=7, order="id asc" ):
 # class SaleOrder(models.Model):
 #    _inherit = 'sale.order'
 
