@@ -57,6 +57,8 @@
                     <div class="page">
                         <h1>Sub Template</h1>
                         <h1 t-field="doc.name"/>
+                        <a href="www.google.com">Google</a>
+                        
                     </div>
             </t>
         </template>
