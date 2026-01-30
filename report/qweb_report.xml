@@ -18,11 +18,9 @@
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="doc">
 
-                    
-
-                    <t t-call="web.external_layout">
-                        <div class="page">
-                            <!-- <h1>Hello How are you ?</h1>
+                    <t t-call="mycompany_custom.sub_template_estate_property">
+                        <!-- <div class="page">
+                             <h1>Hello How are you ?</h1>
                             <t t-set="a" t-value="45545"/>
                             <div t-out="a"/>
                             <h1 t-field="doc.name"/>
@@ -40,20 +38,28 @@
                             </t> -->
 
 
-                            <t t-foreach="doc.shared_owner_ids" t-as="char">
+                            <!-- <t t-foreach="doc.shared_owner_ids" t-as="char">
                                 <div>
                                  
                                     Welcome <span t-field="char.user_id"/>
                                 </div>
-
-                            </t>
-                        </div>
+                            </t> 
+                        </div> -->
                     </t>
-
                 </t>
             </t>
         </template>
 
+
+        <template id = "sub_template_estate_property">
+            <t t-call="web.external_layout">
+             
+                    <div class="page">
+                        <h1>Sub Template</h1>
+                        <h1 t-field="doc.name"/>
+                    </div>
+            </t>
+        </template>
 
 
 
