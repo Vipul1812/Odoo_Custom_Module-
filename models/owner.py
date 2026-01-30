@@ -7,8 +7,11 @@ class Owner(models.Model):
     _name = "owner"
     _description = "Owner Portal"
     
-
-
+    user_id = fields.Many2one(
+        'res.users',
+        string="System User",
+        ondelete='cascade'
+    )
     # serial_no = fields.Integer(
     # string="S.No.",
     # compute="_compute_serial_no",
@@ -171,21 +174,21 @@ class Owner(models.Model):
         data = rec.read(['name','contact_info'])
         print(f'------------------------------Records Read: {data}*************------------------------')
 
-    @api.model
-    def _name_search(self, name, domain=None, operator='ilike', limit=7, order=None ):
-        domain = ['|',('owner_id','ilike',name),('age','ilike',name)]
-        rec = self._search(domain, limit=limit, order=order)
-        print("------------------------------Name Search Records:", rec) 
+    # @api.model
+    # def _name_search(self, name, domain=None, operator='ilike', limit=7, order=None ):
+    #     domain = ['|',('owner_id','ilike',name),('age','ilike',name)]
+    #     rec = self._search(domain, limit=limit, order=order)
+    #     print("------------------------------Name Search Records:", rec) 
 
-    @api.model
-    def _name_search(self, name='', domain=None, operator='ilike', limit=7, order=None ,):
+    # @api.model
+    # def _name_search(self, name='', domain=None, operator='ilike', limit=7, order=None ,):
        
-        domain += [
-                '|',
-                ('name', operator, name),
-                ('age', '=', int(name)) ] if name.isdigit() else ('age', '=', -1)
-        print("------------------------------Name Search Domain:", domain)
-        return self._search(domain, limit=limit, order=order , )
+    #     domain += [
+    #             '|',
+    #             ('name', operator, name),
+    #             ('age', '=', int(name)) ] if name.isdigit() else ('age', '=', -1)
+    #     print("------------------------------Name Search Domain:", domain)
+    #     return self._search(domain, limit=limit, order=order , )
        
 
     

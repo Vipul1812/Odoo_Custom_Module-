@@ -4,13 +4,15 @@
     "summary": "Custom module for MyCompany",
     "category": "Custom",
     "author": "MyCompany",
-    "depends": ["base", "sale"],
+    "depends": ["base", "sale","web"],
     "data": [
         "security/ir.model.access.csv",
         "views/estate_property.xml",
         "views/owner.xml",
         "views/enquiry.xml",
+        # "security/groups.xml",
         "wizard/property_enquiry.xml",
+        "report/qweb_report.xml"
 
     ],
     "installable": True,

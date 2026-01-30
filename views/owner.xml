@@ -16,6 +16,7 @@
             <button name="button_grouped_record" string="Grouped Records" type="object" class="oe_highlight" display="always"/>
             </header>
                 <!-- <field name="serial_no"/> -->
+                <field name="user_id"/>
                 <field name="id"/>
                 <field name="child_ids"/>
                 <field name="parent_id"/>
@@ -49,6 +50,7 @@
                     <notebook>
                         <page string="Personal Info" class="oe_highlight">
                             <group>
+                                <field name="user_id"/>
                                 <field name="name"/>
                                 <field name="contact_info"/>
                                 <field name="date_of_birth"/>

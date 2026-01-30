@@ -49,6 +49,7 @@ class EstateProperty(models.Model):
     _description = 'Real estate Property'
     
     name = fields.Char(string='Property Name', required=True, size=50)
+    user_id = fields.Many2one('res.users' , string="Created By", default=lambda self: self.env.user , ondelete='set null' , index=True , tracking=True)
     postcode = fields.Integer(string='Postcode', required=True, help='Postal area', size=5)
     date_available = fields.Date(string='Available From')
     expected_price = fields.Float(string='Expected Price')
@@ -57,6 +58,9 @@ class EstateProperty(models.Model):
     bedrooms = fields.Integer(string='Bedrooms')
     living_area = fields.Integer(string='Living Area(sqm)')
     garage = fields.Boolean(string='Garage')
+
+    company_id = fields.Many2one(
+    'res.company',string='Company',default=lambda self: self.env.company,required=True)
     
     # Assuming 'owner' is another model name you've defined
     owners_list = fields.Many2one('owner', string='Primary Owner')

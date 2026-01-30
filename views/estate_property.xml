@@ -14,7 +14,10 @@
 
                    
             </header>
+
+                <field name="company_id"/>
                 <field name="id"/>
+                <field name="user_id"/>
                 <field name="name"/>
                 <field name="postcode"/>
                 <field name="expected_price"/>
@@ -44,9 +47,11 @@
                 </header>
                 <sheet>
                     <h1 style="">New House</h1>
+                    <field name="company_id"/>
                     
                     <group>
                         <group>
+                        <field name="user_id"/>
                         <field name="name"/>
                         <field name="postcode"/>
                         <field name="date_available"/>
