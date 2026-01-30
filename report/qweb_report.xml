@@ -32,11 +32,20 @@
                             <div t-field="doc.selling_price"/> -->
 
 
-                            <t t-if="doc.name == 'amarpali'">
+                            <!-- <t t-if="doc.name == 'amarpali'">
                                 <h1>Welcome Amarpali</h1>
                             </t>
                             <t t-else="">
                                 <h1>Welcome <span t-field="doc.name"/> Guest</h1>
+                            </t> -->
+
+
+                            <t t-foreach="doc.shared_owner_ids" t-as="char">
+                                <div>
+                                 
+                                    Welcome <span t-field="char.user_id"/>
+                                </div>
+
                             </t>
                         </div>
                     </t>
