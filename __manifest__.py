@@ -13,7 +13,7 @@
         # "security/groups.xml",
         "wizard/property_enquiry.xml",
         "report/qweb_report.xml",
-        "report/qweb_inherit.xml",
+        # "report/qweb_inherit.xml",
         "report/qweb_custom_pdf.xml"
     ],
     "installable": True,

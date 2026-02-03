@@ -26,7 +26,7 @@
                 <field name="garden" widget="boolean_toggle"/>
                 <field name="garden_message"/>
                 <field name="owners_list"  widget="many2one_tags"/>
-                <field name="shared_owner_ids"/>
+                <field name="shared_owner_ids" widget="many2many_tags"/>
             </tree>
         </field>
     </record>
@@ -72,7 +72,7 @@
                         <page string="Owner_list">
                             <group>
                                 <field name="owners_list" />
-                                <field name="shared_owner_ids"/>
+                                <field name="shared_owner_ids" />
                             </group>
                         </page>
                     </notebook>
@@ -107,7 +107,7 @@
                 <field name="owner_contact"/>
                 <field name="person_gender" decoration-danger="person_gender == 'male'" decoration-success="person_gender == 'female'"/>
                 <field name="price"/>
-                <field name="binary_file"/>
+                <field name="binary_file" widget="image" options="{'size': [150, 150]}"/>
                 <field name="html_file"/>
                 <field name="image_file"/>
                 <field name="currency" widget="monetary" />
