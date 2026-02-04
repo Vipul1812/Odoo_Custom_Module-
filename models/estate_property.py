@@ -86,6 +86,8 @@ class EstateProperty(models.Model):
             self.garden_message = "The record is now inactive."
 
 
+    def print_custom_report(self):
+        return self.env.ref("mycompany_custom.action_report_custom_pdf").report_action(self)
 
     def edit_button(self):
         pass
