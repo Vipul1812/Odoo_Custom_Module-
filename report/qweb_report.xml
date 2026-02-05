@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
-   
     <template id="custom_external_layout_estate"
-              inherit_id="web.external_layout_standard">
+              inherit_id="web.external_layout_standard" >
 
         <xpath expr="//div[contains(@t-attf-class, 'header o_company_')]"
                position="replace">
@@ -42,7 +40,7 @@
                             <!-- <p style="margin:0;">
                                 Page <span class="page"/> / <span class="topage"/>
                             </p> -->
-                            <p><span t-esc="context_timestamp(datetime.datetime.now())"/></p>
+                            <!-- <p><span t-esc="context_timestamp(datetime.datetime.now())"/></p> -->
 
                         </td>
 
@@ -58,7 +56,7 @@
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="doc">
 
-                
+                <!-- CALL CUSTOM HEADER -->
                 <t t-call="mycompany_custom.custom_external_layout_estate">
 
                     

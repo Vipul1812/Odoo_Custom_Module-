@@ -15,6 +15,7 @@
         # "report/qweb_inherit.xml",
         "report/qweb_report.xml",
         "report/qweb_custom_pdf.xml",
+        "Email_template/email.xml",
     ],
     "installable": True,
     "application": True
