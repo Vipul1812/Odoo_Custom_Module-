@@ -21,7 +21,7 @@ class EstateProperty(models.Model):
 
     postcode = fields.Integer(string='Postcode', required=True, help='Postal area', size=5)
     date_available = fields.Date(string='Available From')
-    expected_price = fields.Float(string='Expected Price')
+    expected_price = fields.Float(string='Expected Price' , compute='_compute_expected_price', store=True)
     selling_price = fields.Float(string='Selling Price')
     description = fields.Text(string='Descriptions')
     bedrooms = fields.Integer(string='Bedrooms')
@@ -37,10 +37,10 @@ class EstateProperty(models.Model):
 
     owners_list = fields.Many2one('owner', string='Primary Owner')
 
-    # FIX 3: inverse field corrected (added property_id in owner is NOT required)
+    
     shared_owner_ids = fields.One2many(
         'owner',
-        'reference_field',
+        'property_id',
         string='Shared Owners'
     )
 
@@ -51,6 +51,32 @@ class EstateProperty(models.Model):
         compute='_compute_display_name',
         store=True
     )
+
+    def action_get_average_price(self):
+        average_price = self.env['estate.property'].search([]).mapped('expected_price')
+        if average_price:
+            average_price = sum(average_price) / len(average_price)
+            return {
+                'type': 'ir.actions.client',
+                'tag': 'display_notification',
+                'params': {
+                    'title': 'Average Expected Price',
+                    'message': f'The average expected price is: {average_price:.2f}',
+                    'type': 'success',
+                    'sticky': False,
+                }
+            }
+        else:
+            return {
+                'type': 'ir.actions.client',
+                'tag': 'display_notification',
+                'params': {
+                    'title': 'No Data',
+                    'message': 'No properties found to calculate the average price.',
+                    'type': 'warning',
+                    'sticky': False,
+                }
+            }
 
     @api.onchange('garden')
     def _onchange_garden(self):

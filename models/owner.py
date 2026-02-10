@@ -16,16 +16,12 @@ class Owner(models.Model):
         default=lambda self: self.env.user
     )
 
-    parent_id = fields.Many2one(
-        'owner',
-        string="Parent Owner"
+    property_id = fields.Many2one(
+        'estate.property',
+        string='Property List',
     )
+   
 
-    child_ids = fields.One2many(
-        "owner",
-        "parent_id",
-        string="Child Owners"
-    )
 
     name = fields.Char(string="Name", size=20)
 

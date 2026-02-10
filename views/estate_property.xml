@@ -22,6 +22,13 @@
                                 type="object"
                                 class="oe_highlight"
                                 display="always"/>
+                        <button class="oe_stat_button" 
+                                type="object" 
+                                icon="fa-inr"                         
+                                name="action_get_average_price" display="always">
+                            <field name="expected_price" widget="statinfo"/>
+                        </button>
+                        
                     </header>
 
                     <field name="image_field_name" widget="image" options="{'size': [64, 64]}"/>
@@ -38,7 +45,7 @@
                     <field name="garden" widget="boolean_toggle"/>
                     <field name="garden_message"/>
                     <field name="owners_list"/>
-                    <field name="shared_owner_ids"/> <!-- FIX 2 -->
+                    <field name="shared_owner_ids" widget="many2many_tags"/> 
                 </tree>
             </field>
         </record>
@@ -61,6 +68,12 @@
                         <button name="%(action_property_mail_wizard)d"
                                 string="Mail"
                                 type="action"/>
+                        <button class="oe_stat_button" 
+                                type="object" 
+                                icon="fa-taxi"                         
+                                name="action_get_average_price">
+                            <field name="expected_price" widget="statinfo"/>
+                        </button>
                     </header>
 
                     <sheet>
