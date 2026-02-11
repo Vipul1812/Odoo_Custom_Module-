@@ -12,6 +12,8 @@
         # "data/estate.property.csv",
         "data/estate.property.xml",
         "data/owner.xml",
+        "data/delete_id.xml",
+        # "demo/demo_data_xml.xml"
         "views/estate_property.xml",
         "views/owner.xml",
         "views/enquiry.xml",
@@ -23,6 +25,10 @@
         "report/qweb_custom_pdf.xml",
         "Email_template/email.xml",
     ],
+    "demo": [
+        "demo/demo_data_xml.xml"
+    ],
+
     "installable": True,
     "application": True
 }

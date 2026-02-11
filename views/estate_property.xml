@@ -8,6 +8,7 @@
             <field name="model">estate.property</field>
             <field name="arch" type="xml">
                 <tree>
+                   
                     <header>
                         <button name="%(action_property_mail_wizard)d"
                                 string="Mail"
@@ -21,17 +22,13 @@
                                 string="Report"
                                 type="object"
                                 class="oe_highlight"
-                                display="always"/>
-                        <button class="oe_stat_button" 
-                                type="object" 
-                                icon="fa-inr"                         
-                                name="action_get_average_price" display="always">
-                            <field name="expected_price" widget="statinfo"/>
-                        </button>
+                                display="always"/> 
                         
+                     
                     </header>
 
                     <field name="image_field_name" widget="image" options="{'size': [64, 64]}"/>
+                    <field name="property_addr"/>
                     <field name="company_id"/>
                     <field name="user_id"/>
                     <field name="name"/>
@@ -44,7 +41,7 @@
                     <field name="garage" widget="boolean"/>
                     <field name="garden" widget="boolean_toggle"/>
                     <field name="garden_message"/>
-                    <field name="owners_list"/>
+                    <field name="owners_list" widget="badge"/>
                     <field name="shared_owner_ids" widget="many2many_tags"/> 
                 </tree>
             </field>
@@ -68,15 +65,20 @@
                         <button name="%(action_property_mail_wizard)d"
                                 string="Mail"
                                 type="action"/>
-                        <button class="oe_stat_button" 
-                                type="object" 
-                                icon="fa-taxi"                         
-                                name="action_get_average_price">
-                            <field name="expected_price" widget="statinfo"/>
-                        </button>
                     </header>
 
                     <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" name="action_open_shared_owners" display="always" type="object" >
+                                <div class="o_stat_info">
+                                    <span class="o_stat_text"/>
+                                    <span class="o_stat_value">
+                                        <field name="shared_owner_ids" widget="statinfo"/>
+                                    </span>
+                                </div>
+                            </button>
+                        </div>
+                        
                         <field name="image_field_name"
                                widget="image"
                                class="oe_avatar"
@@ -88,6 +90,7 @@
 
                         <group>
                             <group>
+                                <field name="property_addr"/>
                                 <field name="user_id"/>
                                 <field name="name"/>
                                 <field name="postcode"/>
@@ -113,12 +116,18 @@
 
                             <page string="Owner_list">
                                 <group>
-                                    <field name="owners_list"/>
+                                    <field name="owners_list" />
                                     <field name="shared_owner_ids"/>
                                 </group>
                             </page>
                         </notebook>
                     </sheet>
+
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
                 </form>
             </field>
         </record>
@@ -156,15 +165,15 @@
 
                     <field name="owner_id"/>
                     <field name="owner_contact"/>
-                    <field name="person_gender"
-                           decoration-danger="person_gender == 'male'"
-                           decoration-success="person_gender == 'female'"/>
+                    <field name="person_gender" widget="badge"
+                           decoration-danger="person_gender == 'female'"
+                           decoration-success="person_gender == 'male'"/>
                     <field name="price"/>
-                    <field name="binary_file"/> <!-- FIX 3 -->
+                    <field name="binary_file"/>
                     <field name="html_file"/>
-                    <field name="image_file"/>
+                    <field name="image_file" widget="image" options="{'size': [100, 100]}"/>
                     <field name="currency" widget="monetary"/>
-                    <field name="curr_id" invisible="1"/> <!-- FIX 4 -->
+                    <field name="curr_id" invisible="1"/> 
                     <field name="deadline_date"/>
                 </tree>
             </field>
@@ -183,7 +192,7 @@
                                 <field name="owner_contact"/>
                                 <field name="image_file"/>
                                 <field name="currency" widget="monetary"/>
-                                <field name="curr_id" invisible="1"/> <!-- FIX 4 -->
+                                <field name="curr_id" invisible="1"/> 
                                 <field name="price"/>
                                 <field name="person_gender"/>
                             </group>

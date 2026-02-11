@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo>
+<odoo noupdate="0">
     <data>
 
         <record id="estate_property_1" model="estate.property">
@@ -7,8 +7,8 @@
             <field name="postcode">12345</field>
             <field name="expected_price">500000</field>
         </record>
-
-        <!-- <record id="property_vipul" model="estate.property">
+<!-- 
+        <record id="property_vipul" model="estate.property">
             <field name="name">amarpali</field>
             <field name="postcode">45678</field>
             <field name="shared_owner_ids"
@@ -17,6 +17,9 @@
                      (0,0,{'name':'yash '})
                    ]"/>
         </record> -->
+        <function model="estate.property" name="change_roll_no"/>
+
+
 
     </data>
 </odoo>

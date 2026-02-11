@@ -4,9 +4,11 @@ from odoo import models, fields, api
 class EstateProperty(models.Model):
     _name = 'estate.property'
     _description = 'Real estate Property'
-    _inherit = ['mail.thread']  # FIX 1
+    _inherit = ['mail.thread', 'mail.activity.mixin']
+
 
     image_field_name = fields.Image(string='Image')  # FIX 7
+    property_addr = fields.Char(string='Property Address',size=100)
 
     name = fields.Char(string='Property Name', required=True, size=50)
 
@@ -21,7 +23,7 @@ class EstateProperty(models.Model):
 
     postcode = fields.Integer(string='Postcode', required=True, help='Postal area', size=5)
     date_available = fields.Date(string='Available From')
-    expected_price = fields.Float(string='Expected Price' , compute='_compute_expected_price', store=True)
+    expected_price = fields.Float(string='Expected Price' , store=True)
     selling_price = fields.Float(string='Selling Price')
     description = fields.Text(string='Descriptions')
     bedrooms = fields.Integer(string='Bedrooms')
@@ -41,7 +43,7 @@ class EstateProperty(models.Model):
     shared_owner_ids = fields.One2many(
         'owner',
         'property_id',
-        string='Shared Owners'
+        string='Shared Owners' , compute="_compute_shared_owners", inverse='_inverse_shared_owners',store=True
     )
 
     garden = fields.Boolean(string='Garden')
@@ -51,32 +53,47 @@ class EstateProperty(models.Model):
         compute='_compute_display_name',
         store=True
     )
+    
+    
+    def _compute_shared_owners(self):
+        for rec in self:
+            rec.shared_owner_ids = self.env['owner'].search([('property_id', '=', rec.id)])
+    
+    def _inverse_shared_owners(self):
+        for rec in self:
+            # Owners currently linked to this property
+            current_owners = rec.shared_owner_ids
 
-    def action_get_average_price(self):
-        average_price = self.env['estate.property'].search([]).mapped('expected_price')
-        if average_price:
-            average_price = sum(average_price) / len(average_price)
-            return {
-                'type': 'ir.actions.client',
-                'tag': 'display_notification',
-                'params': {
-                    'title': 'Average Expected Price',
-                    'message': f'The average expected price is: {average_price:.2f}',
-                    'type': 'success',
-                    'sticky': False,
-                }
-            }
-        else:
-            return {
-                'type': 'ir.actions.client',
-                'tag': 'display_notification',
-                'params': {
-                    'title': 'No Data',
-                    'message': 'No properties found to calculate the average price.',
-                    'type': 'warning',
-                    'sticky': False,
-                }
-            }
+            # Owners removed from the one2many
+            removed_owners = self.env['owner'].search([
+                ('property_id', '=', rec.id),
+                ('id', 'not in', current_owners.ids)
+            ])
+
+            # Unlink removed owners
+            removed_owners.write({'property_id': False})
+
+            # Link added/edited owners
+            current_owners.write({'property_id': rec.id})
+
+
+    def action_open_shared_owners(self):
+        return {
+            'name': 'Shared Owners',
+            'type': 'ir.actions.act_window',
+            'res_model': 'owner',
+            'view_mode': 'tree,form',
+            'domain': [('property_id', '=', self.id)],
+        }
+
+
+    @api.model
+    def change_roll_no(self):
+        for rec in self.search([('property_addr','=',False)]):
+            rec.property_addr = "Pid" + str(rec.id)
+
+    @api.depends('expected_price')
+
 
     @api.onchange('garden')
     def _onchange_garden(self):
