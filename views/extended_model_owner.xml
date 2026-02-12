@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_extended_model_owner_form" model="ir.ui.view">
+            <field name="name">owner.form.extended</field>
+            <field name="model">owner</field>
+            <field name="inherit_id" ref="mycompany_custom.form_view_owner"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='personal_info']/group/field[@name='contact_info']" position="after">
+                    <field name="additional_info"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

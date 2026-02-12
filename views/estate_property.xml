@@ -137,22 +137,33 @@
             <field name="name">estate.property.kanban</field>
             <field name="model">estate.property</field>
             <field name="arch" type="xml">
-                <kanban>
+                <kanban class="o_kanban_mobile">
+                    <field name="image_field_name" widget="image" options="{'size': [200, 200]}"/>
+                    <field name="name"/> 
+                    <field name="property_addr"/> 
+                    <field name="expected_price"/> 
+                    <field name="selling_price"/>
+                    <field name="date_available"/>   
+                    <field name="name"/> 
+                    <field name="property_addr"/>
+                    <field name="expected_price"/> 
+                    <field name="selling_price"/> 
+                    <field name="date_available"/>
                     <templates>
                         <t t-name="kanban-box">
-                            <div class="oe_kanban_global_click o_kanban_record">
-                                <div class="o_kanban_image">
+                            <div class="oe_kanban-card">
+                                <span class="oe_kanban_image">
                                     <field name="image_field_name" widget="image" options="{'size': [200, 200]}"/>
-                                </div>
-                                <div class="o_kanban_details">
-                                    <strong><field name="name"/></strong>
-                                    <p><field name="property_addr"/></p>
-                                    <p><field name="postcode"/></p>
-                                    <p><field name="expected_price"/></p>
-                                    <p><field name="selling_price"/></p>
+                                </span>
+                                <div class="oe_kanban_details">
+                                    <strong><field name="name"/></strong><br/>
+                                    <field name="property_addr"/><br/>
+                                    <field name="expected_price"/><br/>
+                                    <field name="selling_price"/><br/>
+                                    <field name="date_available"/><br/>
                                 </div>
                             </div>
-                        </t>            
+                        </t>       
                     </templates>
                 </kanban>
             </field>

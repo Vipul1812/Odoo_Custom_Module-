@@ -18,6 +18,7 @@
         "views/owner.xml",
         "views/enquiry.xml",
         "views/email_temp.xml",
+        "views/extended_model_owner.xml",
         "wizard/property_enquiry.xml",
         "wizard/email_wizard.xml",
         # "report/qweb_inherit.xml",

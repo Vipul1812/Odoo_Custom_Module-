@@ -49,7 +49,7 @@
 
                     <sheet>
                         <notebook>
-                            <page string="Personal Info" class="oe_highlight">
+                            <page string="Personal Info" class="oe_highlight " name="personal_info">
                                 <group>
                                     <field name="user_id"/>
                                     <field name="name"/>

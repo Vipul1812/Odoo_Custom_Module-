@@ -28,7 +28,7 @@ class PropertyReportXlsx(models.AbstractModel):
 
             header_style = workbook.add_format({
                 'bold': True,
-                'bg_color': '#f0f0f0',
+                'bg_color': "#ac7474",
                 'border': 1,
                 'align': 'center'
             })
