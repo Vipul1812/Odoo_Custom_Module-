@@ -38,6 +38,7 @@
                     <field name="description"/>
                     <field name="bedrooms"/>
                     <field name="living_area"/>
+                    <field name="activity_ids" widget="list_activity" optional="show" />
                     <field name="garage" widget="boolean"/>
                     <field name="garden" widget="boolean_toggle"/>
                     <field name="garden_message"/>
