@@ -5,8 +5,9 @@
     "category": "Custom",
     "author": "MyCompany",
     "license": "LGPL-3",
-    "depends": ["base", "sale", "web", "mail", "report_xlsx"],
+    "depends": ["base", "sale", "web", "mail", "report_xlsx", "point_of_sale",'project'],
     "data": [
+        "security/security_access.xml",
         "security/ir.model.access.csv",
         "data/owner.csv",
         "data/estate.property.xml",
@@ -17,6 +18,7 @@
         "views/enquiry.xml",
         "views/email_temp.xml",
         "views/extended_model_owner.xml",
+        "views/custom.xml",
         "wizard/property_enquiry.xml",
         "wizard/email_wizard.xml",
         "report/qweb_report.xml",
@@ -28,12 +30,14 @@
         "demo/demo_data_xml.xml"
     ],
 
-    "assets": {
-        "web.assets_backend": [
-            "mycompany_custom/static/src/css/tree_spacing.css",
+     'assets': {
+        'web.assets_backend': [
+            '/mycompany_custom/static/src/js/button_pos.js',
+            '/mycompany_custom/static/src/xml/pos_button.xml',
         ],
     },
 
+
     "installable": True,
-    "application": True
+    "application": False,
 }

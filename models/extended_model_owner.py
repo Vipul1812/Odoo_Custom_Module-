@@ -19,3 +19,20 @@ class Address(models.Model):
     Owner_city= fields.Char(string="Owner City", store=True)
     Owner_pincode= fields.Char(string="Owner Pincode", store=True)
     Owner_additional_info = fields.Char(string="Owner Additional Info",  store=True)
+    
+    
+class EstatePropertyOffer(models.Model):
+    _inherit ='estate.property.offer'
+    
+    
+    person_gender = fields.Selection([
+        ('male', 'Male'),
+    ], string="Person Gender")
+    
+
+
+
+
+    
+    
+    
