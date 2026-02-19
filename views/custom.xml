@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     
+    <!-- <record id="action_customer_stats" model="ir.actions.client">
+        <field name="name">Customer Statistics</field>
+        <field name="tag">CharCounter</field>
+        
+    </record> -->
+
     <record id="action_customer_stats" model="ir.actions.client">
         <field name="name">Customer Statistics</field>
-        <field name="tag">PriceConverter</field>
+        <field name="tag">Dashboard</field>
         
     </record>
 
@@ -15,6 +21,8 @@
           name="Custom View"
           parent="menu_estate_root"
           action="action_customer_stats"/>
+
+
 
 </odoo>
 
