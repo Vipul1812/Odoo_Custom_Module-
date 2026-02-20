@@ -36,7 +36,9 @@
             '/mycompany_custom/static/src/xml/pos_button.xml',
             '/mycompany_custom/static/src/js/dashboard.js',
             '/mycompany_custom/static/src/xml/dashboard.xml',
-            '/mycompany_custom/static/src/js/card.js'
+            '/mycompany_custom/static/src/js/card.js',
+            # '/mycompany_custom/static/src/js/systray_icon.js',
+            # '/mycompany_custom/static/src/xml/systray_icon.xml',
         ],
     },
 
