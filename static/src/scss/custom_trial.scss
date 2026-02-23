@@ -1,0 +1,36 @@
+.o_field_Customtrial {
+    display: inline-flex;
+    align-items: center;
+    font-weight: bold;
+    font-size: 25px; // Ensures everything inside is strong
+
+    &.o_state_toggler {
+        padding: 4px 12px;
+        font-size: 13px;
+        white-space: nowrap;
+        border-radius: 50px; // Matches the "pill" look from your JS
+    }
+
+    .fa {
+        font-size: 1.2em;
+        vertical-align: middle;
+    }
+
+    // Matching the "o_status_bubble" logic from your snippet
+    .o_status {
+        width: 12px;
+        height: 12px;
+        display: inline-block;
+        border-radius: 50%;
+        vertical-align: middle;
+    }
+}
+
+// Ensure the dropdown items are also bold when the list opens
+.dropdown-menu {
+    .dropdown-item {
+        span.fw-bold {
+            font-weight: 700 !important;
+        }
+    }
+}

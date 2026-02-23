@@ -25,11 +25,22 @@ class EstatePropertyOffer(models.Model):
     _inherit ='estate.property.offer'
     
     
-    person_gender = fields.Selection([
-        ('male', 'Male'),
-    ], string="Person Gender")
+  
     
-
+    person_gender = fields.Selection(
+        [
+      
+         ("new", "New"),
+        ("in_progress", "In Progress"),
+        ("done", "Done"),
+        ],
+    )
+    
+    person_name = fields.Selection(
+        [('vipul', "Vipul"), ('sachin', "Sachin"),('rahul', "Rahul"),   ('rohit', "Rohit") , ('suresh', "Suresh")],
+        string="Person's Name",
+        help="Enter Your Name"
+    )
 
 
 

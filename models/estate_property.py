@@ -197,6 +197,12 @@ class EstatePropertyOffer(models.Model):
         string="Person's Gender",
         help="Enter Your Gender"
     )
+    
+    person_name = fields.Selection(
+        [('vipul', "Vipul"), ('sachin', "Sachin")],
+        string="Person's Name",
+        help="Enter Your Name"
+    )
 
     deadline_date = fields.Datetime(string="Dead Line Hour")
 

@@ -13,6 +13,8 @@
         </record>
     </data>
 
+
+
     <record id="view_extended_model_owner_tree" model="ir.ui.view">
         <field name="name">owner.tree.extended</field>
         <field name="model">owner</field>
