@@ -7,9 +7,11 @@
 
         <!-- pill content -->
         <xpath expr="//t[@t-set-slot='toggler']/div" position="replace">
-            <div class="d-flex align-items-center gap-2">
-                <i t-attf-class="{{ stateIcon(currentValue) }} {{ statusColor(currentValue) }}"/>
-                <span t-out="label"/>
+            <div class="o_OfferStateSelection_toggler">
+                <span class="o_OfferStateSelection_icon">
+                    <i t-attf-class="{{ stateIcon(currentValue) }} {{ statusColor(currentValue) }}"/>
+                </span>
+                <span class="o_OfferStateSelection_label" t-out="label"/>
             </div>
         </xpath>
 
@@ -17,21 +19,18 @@
         <xpath expr="//Dropdown" position="attributes">
             <attribute name="togglerClass">
                 getTogglerClass(currentValue)
-            </attribute>
-            
+            </attribute>   
         </xpath>
 
         <!-- dropdown icons -->
-        <xpath expr="//DropdownItem/span[1]" position="attributes">
-            <attribute name="t-attf-class">
-                {{ stateIcon(option[0]) }}
-            </attribute>
+        <xpath expr="//DropdownItem/span[1]" position="replace">
+            <span class="o_OfferStateSelection_icon">
+                <i t-attf-class="{{ stateIcon(option[0]) }}"/>
+            </span>
         </xpath>
 
-        <xpath expr="//DropdownItem/span[2]" position="attributes"> 
-            <attribute name="t-attf-class">
-                {{ statusColor(option[0]) }}
-            </attribute>
+        <xpath expr="//DropdownItem/span[2]" position="replace"> 
+            <span class="o_OfferStateSelection_label" t-attf-class="{{ statusColor(option[0]) }}" t-out="option[1]"/>
         </xpath>
 
     </t>

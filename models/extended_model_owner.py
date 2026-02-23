@@ -32,6 +32,9 @@ class EstatePropertyOffer(models.Model):
       
          ("new", "New"),
         ("in_progress", "In Progress"),
+        ("changes_requested", "Changes Requested"),
+        ("approved", "Approved"),
+        ("cancel", "Canceled"),
         ("done", "Done"),
         ],
     )
