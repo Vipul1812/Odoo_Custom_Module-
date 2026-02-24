@@ -15,3 +15,8 @@
 .o_list_view .o_data_row {
     border-bottom: 1px solid #eaeaea;
 }
+
+/* Optional: Add some padding to the last row */
+.o_list_view .o_data_row:last-child {
+    padding-bottom: 15px !important;
+}
