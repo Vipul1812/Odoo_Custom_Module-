@@ -38,6 +38,24 @@
         align-items: center;
     }
 
+    .o_customtrial_icon :hover{
+        transform: scale(1.2);
+        transition: transform 0.2s ease-in-out;
+
+    }
+    .o_customtrial_toggler :hover{
+            transform: scale(1.05);
+            transition: transform 0.2s ease-in-out;
+            
+    }
+    .o_customtrial_icon :hover{
+        transform: scale(0.9);
+        transition: transform 0.1s ease-in-out;
+        color : black;
+    }
+
+
+
     
     .dropdown-menu {
 

@@ -12,11 +12,11 @@ export class Customtrial extends StateSelectionField {
         super.setup();
 
         this.icons = {
-            vipul: "fa fa-circle-o",
+            vipul: "o_button_icon fa fa-fw fa-envelope-open ",
             sachin: "o_status",
             rahul: "fa fa-exclamation-circle",
             rohit: "o_status o_status_green",
-            suresh: "fa fa-check-circle",
+            suresh: "o_button_icon fa fa-fw fa-comments",
         };
 
         this.colors = {
