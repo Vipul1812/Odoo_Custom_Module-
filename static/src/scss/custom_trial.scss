@@ -1,0 +1,77 @@
+.o_field_Customtrial {
+
+    .o_customtrial_toggler {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 12px;
+        white-space: nowrap;
+        font-weight: 600;
+    }
+
+ 
+    .o_customtrial_icon {
+        width: 18px;            
+        height: 18px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        gap: 5px;
+
+        i {
+            font-size: 1.1em;
+            line-height: 1;
+        }
+
+        .o_status {
+            width: 25px;
+            height: 15px;
+            border-radius: 50%;
+        }
+    }
+
+    
+    .o_customtrial_label {
+        line-height: 1.2;
+        display: inline-flex;
+        align-items: center;
+    }
+
+    .o_customtrial_icon :hover{
+        transform: scale(1.2);
+        transition: transform 0.2s ease-in-out;
+
+    }
+    .o_customtrial_toggler :hover{
+            transform: scale(1.05);
+            transition: transform 0.2s ease-in-out;
+            
+    }
+    .o_customtrial_icon :hover{
+        transform: scale(0.9);
+        transition: transform 0.1s ease-in-out;
+        color : black;
+    }
+
+
+
+    
+    .dropdown-menu {
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: larger;
+        }
+
+        
+        .fa,
+        .o_status {
+            margin: 0 !important;
+            transform: none !important;
+            vertical-align: middle;
+        }
+    }
+}
