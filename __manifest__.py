@@ -38,8 +38,6 @@
             '/mycompany_custom/static/src/js/dashboard.js',
             '/mycompany_custom/static/src/xml/dashboard.xml',
             '/mycompany_custom/static/src/js/card.js',
-            # '/mycompany_custom/static/src/js/systray_icon.js',
-            # '/mycompany_custom/static/src/xml/systray_icon.xml',
             '/mycompany_custom/static/src/js/offer_state_selection.js',
             '/mycompany_custom/static/src/scss/offer_state_selection.scss',
             '/mycompany_custom/static/src/xml/offer_state_selection.xml',
@@ -51,5 +49,5 @@
 
 
     "installable": True,
-    "application": False,
+    "application": True,
 }

@@ -27,6 +27,7 @@
             <h1>My TODO Card List</h1>
             <h2>Static Todo with dyanmic attributes </h2>
             <div class="d-flex flex-wrap mt-4">
+                <input type="text" class="form-control w-auto" placeholder="Enter new task name" t-on-keydown="addTodo"/>
                 <t t-foreach="state.Todo" t-as="item" t-key="item.id">
                     <TODOCard todo="item"/>
                 </t>
