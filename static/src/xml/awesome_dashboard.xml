@@ -1,0 +1,46 @@
+<templates xml:space="preserve">
+    <t t-name="awesome_dashboard">
+        <Layout display="display" class="'o_dashboard_layout bg-100'">
+            <t t-set-slot="control-panel-navigation">
+                <div class="o_breadcrumb">
+                    <span class="fw-bold fs-4">
+                        <t t-esc="env.config.action_name"/>
+                    </span>
+                </div>
+            </t>
+            <div class="o_content p-4">
+                <!-- SELECT OFFER -->
+                <div class="d-flex gap-2 mb-4">
+                    <select class="form-select w-25"
+        t-on-change="selectOffer">
+                        <option value="">Select Offer</option>
+                        <t t-foreach="state.offers" t-as="offer" t-key="offer.id">
+                            <option t-att-value="offer.id">
+                                <t t-esc="offer.name"/>
+                            </option>
+                        </t>
+                    </select>
+                    <button class="btn btn-success"
+        t-on-click="addCard">
+
+                    Add Card
+                    
+                    </button>
+                </div>
+                <!-- CARD DISPLAY -->
+                <div class="d-flex flex-wrap gap-3">
+                    <t t-foreach="state.cards" t-as="card" t-key="card.id">
+                        <div class="card shadow-sm p-2" style="width:220px">
+                            <img t-att-src="card.image"
+     style="height:120px;object-fit:cover"
+     class="img-fluid mb-2"/>
+                            <h6>
+                                <t t-esc="card.name"/>
+                            </h6>
+                        </div>
+                    </t>
+                </div>
+            </div>
+        </Layout>
+    </t>
+</templates>

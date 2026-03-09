@@ -5,6 +5,7 @@ class EstateProperty(models.Model):
     _name = 'estate.property'
     _description = 'Real estate Property'
     _inherit = ['mail.thread', 'mail.activity.mixin']
+    _order = 'id desc'
 
 
     image_field_name = fields.Image(string='Image')  # FIX 7
@@ -179,7 +180,7 @@ class EstatePropertyOffer(models.Model):
 
     binary_file = fields.Binary(string="Binary File")
     html_file = fields.Html(string="Html File", help="html field is created")
-    image_file = fields.Image(max_width=5, max_height=10)
+    image_file = fields.Binary(max_width=5, max_height=10)
 
     currency = fields.Monetary(
         string="Fee",
@@ -256,3 +257,19 @@ class EstatePropertyOffer(models.Model):
         res['person_gender'] = 'male'
         print("------------------------------Default Get Method Res:", res)
         return res
+    
+    @api.model
+    def get_offers_for_dashboard(self):
+
+        offers = self.search([])
+
+        data = []
+
+        for offer in offers:
+            data.append({
+                "id": offer.id,
+                "name": offer.owner_id.name,
+                "image": f"/web/image/estate.property.offer/{offer.id}/image_file"
+            })
+
+        return data

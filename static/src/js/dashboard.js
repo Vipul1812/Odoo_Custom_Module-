@@ -28,8 +28,8 @@ export class Dashboard extends Component {
             counter2: this.props.counter || 0,
 
             Todo: [
-                { id: 1, name: "Learn OWL", iscomplete: false },
-                { id: 2, name: "Build an Odoo App", iscomplete: false },
+                // { id: 1, name: "Learn OWL", iscomplete: false },
+                // { id: 2, name: "Build an Odoo App", iscomplete: false },
             ],
         });
         this.updateParentCount = this.updateParentCount.bind(this);
@@ -39,6 +39,18 @@ export class Dashboard extends Component {
         );
 
         this.unsafeContent = "<b>This will look like text, not bold</b>";
+    }
+
+    addTodo(ev){
+        if (ev.key === "Enter" && ev.target.value.trim() !== ""){
+            this.state.Todo.push({
+                id: this.state.Todo.length + 1,
+                name: ev.target.value,
+                iscomplete: false,
+            });
+            ev.target.value = "";       
+        }
+
     }
 
     incrementCounter1() {

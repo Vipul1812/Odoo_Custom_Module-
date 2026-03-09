@@ -1,0 +1,34 @@
+.o_dashboard_layout {
+
+    background-color: #f3f4f7 !important;
+
+    .o_control_panel {
+
+        border-bottom: 1px solid $border-color;
+        padding: 0.75rem 1.5rem !important;
+        background-color: white;
+
+        .o_breadcrumb span {
+            letter-spacing: -0.5px;
+        }
+
+    }
+
+    .card {
+
+        border: none;
+        border-radius: 0.75rem;
+        transition: all 0.2s ease-in-out;
+
+        &:hover {
+
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 10px 15px -3px rgba(0,0,0,0.1) !important;
+
+        }
+
+    }
+
+}

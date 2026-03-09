@@ -25,7 +25,8 @@
         "report/qweb_report.xml",
         "report/qweb_custom_pdf.xml",
         "Email_template/email.xml",
-        "report/report_action_xslx.xml"
+        "report/report_action_xslx.xml",
+        "views/main awesome_dashboard.xml"
     ],
     "demo": [
         "demo/demo_data_xml.xml"
@@ -38,18 +39,21 @@
             '/mycompany_custom/static/src/js/dashboard.js',
             '/mycompany_custom/static/src/xml/dashboard.xml',
             '/mycompany_custom/static/src/js/card.js',
-            # '/mycompany_custom/static/src/js/systray_icon.js',
-            # '/mycompany_custom/static/src/xml/systray_icon.xml',
-            '/mycompany_custom/static/src/js/offer_state_selection.js',
-            '/mycompany_custom/static/src/scss/offer_state_selection.scss',
-            '/mycompany_custom/static/src/xml/offer_state_selection.xml',
+            # '/mycompany_custom/static/src/js/offer_state_selection.js',
+            # '/mycompany_custom/static/src/scss/offer_state_selection.scss',
+            # '/mycompany_custom/static/src/xml/offer_state_selection.xml',
              '/mycompany_custom/static/src/js/custom_trial.js',
              '/mycompany_custom/static/src/scss/custom_trial.scss',
              '/mycompany_custom/static/src/xml/custom_trial.xml',
+             '/mycompany_custom/static/src/js/awesome_dashboard.js',
+             '/mycompany_custom/static/src/xml/awesome_dashboard.xml',
+             '/mycompany_custom/static/src/scss/awesome_dashboard.scss',
+             '/mycompany_custom/static/src/js/dashboard_service.js',
+             
         ],
     },
 
 
     "installable": True,
-    "application": False,
+    "application": True,
 }
