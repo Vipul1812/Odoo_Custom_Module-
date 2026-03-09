@@ -1,5 +1,4 @@
 /** @odoo-module **/
-
 import {
     StateSelectionField,
     stateSelectionField,

@@ -26,18 +26,7 @@ class EstatePropertyOffer(models.Model):
     
     
   
-    
-    person_gender = fields.Selection(
-        [
-      
-         ("new", "New"),
-        ("in_progress", "In Progress"),
-        ("changes_requested", "Changes Requested"),
-        ("approved", "Approved"),
-        ("cancel", "Canceled"),
-        ("done", "Done"),
-        ],
-    )
+
     
     person_name = fields.Selection(
         [('vipul', "Vipul"), ('sachin', "Sachin"),('rahul', "Rahul"),   ('rohit', "Rohit") , ('suresh', "Suresh")],

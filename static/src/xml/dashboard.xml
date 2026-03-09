@@ -95,6 +95,8 @@
         </div>
     </t>
 
+    
+
 
     <t t-name="CardTemplate">
         <div class="card m-2 shadow-sm" style="width: 18rem;">
