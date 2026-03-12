@@ -1,0 +1,80 @@
+<odoo>
+    <template id="registration_page_template" name="Practitioner Registration">
+        <t t-call="website.layout">
+            <div class="container mt-5 mb-5">
+                <h2 class="text-center mb-4">Practitioner Registration</h2>
+                <form action="/registration/submit" method="post">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label>Full Name</label>
+                            <input type="text" name="name" class="form-control" required="1"/>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label>Email</label>
+                            <input type="email" name="email" class="form-control" required="1"/>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label>Phone</label>
+                            <input type="text" name="phone" class="form-control"/>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label>HPCSA Student Reg Number</label>
+                            <input type="text" name="registration_number" class="form-control"/>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label>Profession</label>
+                            <select name="profession_category_id" class="form-control">
+                                <option value="">Select</option>
+                                <t t-foreach="professions" t-as="p">
+                                    <option t-att-value="p.id">
+                                        <t t-esc="p.name"/>
+                                    </option>
+                                </t>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label>Board</label>
+                            <select name="board_type_id" class="form-control">
+                                <option value="">Select</option>
+                                <t t-foreach="boards" t-as="b">
+                                    <option t-att-value="b.id">
+                                        <t t-esc="b.name"/>
+                                    </option>
+                                </t>
+                            </select>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label>
+                                <input type="checkbox" name="rwpos_approval"/> RWOPS Approval
+                            </label>
+                            <label class="ms-3">
+                                <input type="checkbox" name="sessional_contract"/> Sessional Contract
+                            </label>
+                        </div>
+                        <h4 class="mt-4">Qualifications</h4>
+                        <table class="table table-bordered">
+                            <tr>
+                                <th>Degree</th>
+                                <th>Year</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" name="qual_name_1" class="form-control"/>
+                                </td>
+                                <td>
+                                    <input type="text" name="qual_year_1" class="form-control"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-primary">
+Submit Registration
+</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </t>
+    </template>
+</odoo>

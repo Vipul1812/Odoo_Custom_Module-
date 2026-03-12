@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="practitioner_registration_form" model="ir.ui.view">
+	    <field name="name">practitioner.registration.form</field>
+	    <field name="model">res.partner</field>
+	    <field name="priority" eval="1"/>
+	    <field name="inherit_id" ref="base.view_partner_form"/>
+	    <field name="arch" type="xml">
+	    	<xpath expr="//group[1]" position="after">
+	    		<group>
+	    			<group string="Professional Details">
+	    				<field name="profession_category_id"/>
+	    				<field name="Registration_number"/>
+	    				<field name="board_type"/>
+	    			</group>
+	    			
+	    			<group string="Practice Permissions">
+	    				<field name="rwpos_approval"/>
+	    				<field name="sessional_contract"/>
+	    			</group>
+	    		</group>
+	    	</xpath>
+
+
+	    	<page name="contact_addresses" position="attributes">
+	    		<attribute name="invisible">1</attribute>
+	    	</page>
+
+	    	<page name="sales_purchases" position="attributes">
+	    		<attribute name="invisible">1</attribute>
+	    	</page>
+
+	    	<page name='internal_notes' position="before">
+                <page name="qualifications_ids" string="Qualifications Details">
+                	<field name="qualifications_ids">
+                		<list editable="top">
+                			<field name="degree_certificate"/>
+                			<field name="university_name"/>
+                			<field name="year_of_completion"/>
+                			<field name="internship_community_service_proof"/>
+                		</list>
+                	</field>
+                </page>
+
+                <page name="experience_ids" string="Experience Details">
+                	<field name="experience_ids">
+                		<list editable="top">
+	                		<field name="start_date"/>
+	                		<field name="end_date"/>
+	                		<field name="service_record"/>
+                		</list>
+                	</field>
+                </page>
+
+                <page name="licensure_ids" string="Licensure Details">
+                	<field name="licensure_ids">
+                		<list editable="top">
+	                		<field name="name"/>
+	                		<field name="documents"/>
+                		</list>
+                	</field>
+                </page>
+
+            </page>
+
+	    </field>
+	</record>
+
+</odoo>

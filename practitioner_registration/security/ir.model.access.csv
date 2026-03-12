@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+practitioner_registration.access_profession_category,access_profession_category,practitioner_registration.model_profession_category,base.group_user,1,1,1,1
+practitioner_registration.access_board_type,access_board_type,practitioner_registration.model_board_type,base.group_user,1,1,1,1
+practitioner_registration.access_qualifications,access_qualifications,practitioner_registration.model_qualifications,base.group_user,1,1,1,1
+practitioner_registration.access_experience,access_experience,practitioner_registration.model_experience,base.group_user,1,1,1,1
+practitioner_registration.access_licensure,access_licensure,practitioner_registration.model_licensure,base.group_user,1,1,1,1

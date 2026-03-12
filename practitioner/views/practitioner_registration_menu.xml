@@ -1,0 +1,11 @@
+<odoo>
+    <data> 
+        <record id="menu_practitioner_registration" model="website.menu">
+            <field name="name">Practitioner Registration</field>
+            <field name="url">/practitioner/registration</field>
+            <field name="parent_id" ref="website.main_menu"/>
+            <field name="sequence">50</field>
+            <field name="is_mega_menu" eval="False"/> 
+        </record>
+    </data>
+</odoo>
