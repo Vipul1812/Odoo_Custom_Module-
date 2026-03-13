@@ -61,3 +61,7 @@ class PractitionerController(http.Controller):
                     })
 
         return request.render('website.contactus_thanks')
+    
+    @http.route('/mlp', type='http', auth="public", website=True)
+    def mlp_registration(self, **kwargs):
+        return request.render('practitioner_registration.mlp_template', {})

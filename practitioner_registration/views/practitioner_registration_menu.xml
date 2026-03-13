@@ -7,5 +7,14 @@
             <field name="parent_id" ref="website.main_menu"/>
             <field name="sequence" type="int">50</field>
         </record>
+
+    
+        <record id="menu_mlp_registration" model="website.menu">
+            <field name="name">MLP</field>
+            <field name="url">/mlp</field>
+            <field name="parent_id" ref="website.main_menu"/>
+            <field name="sequence" type="int">51</field>
+        </record>
+    
     </data>
 </odoo>

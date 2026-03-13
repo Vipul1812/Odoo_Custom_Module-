@@ -18,6 +18,7 @@
         'views/digital_maintenance_of_licensure_views.xml',
         'views/practitioner_registration_template.xml',
         'views/practitioner_registration_menu.xml',
+        'views/mlp.xml'
     ],
     'assets':{
         'web.assets_frontend': [
