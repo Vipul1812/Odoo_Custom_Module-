@@ -159,7 +159,7 @@
                         <div class="carousel-inner" style="height:100%;">
                             <!-- SLIDE 1 -->
                             <div class="carousel-item active" style="height:100%;">
-                                <div style="background-image: url('/practitioner/static/src/img/hpcsa (1).png'); background-size:cover;background-position:center;height:100%;width:100%;position:absolute;"></div>
+                                <div style="background-image: url('practitioner_registration/static/src/slider1.png'); background-size:cover;background-position:center;height:100%;width:100%;position:absolute;"></div>
                                 <div class="container d-flex flex-column justify-content-center h-100 position-relative pt-5" style="z-index:10;">
                                     <div class="row justify-content-end">
                                         <div class="col-lg-7 text-end">
@@ -179,7 +179,7 @@
                             </div>
                             <!-- SLIDE 2 -->
                             <div class="carousel-item" style="height:100%;">
-                                <div style="background-image: url('/practitioner/static/src/img/blue_slider.png'); background-size:cover;background-position:center;height:100%;width:100%;position:absolute;"></div>
+                                <div style="background-image: url('practitioner_registration/static/src/slider2.png'); background-size:cover;background-position:center;height:100%;width:100%;position:absolute;"></div>
                                 <div class="container d-flex flex-column justify-content-center h-100 position-relative pt-5" style="z-index:10;">
                                     <div class="row justify-content-end">
                                         <div class="col-lg-7 text-end">
@@ -199,7 +199,7 @@
                             </div>
                             <!-- SLIDE 3 -->
                             <div class="carousel-item" style="height:100%;">
-                                <div style="background-image: url('/practitioner/static/src/img/1756722164487_1746260029440_vote.png'); background-size:cover;background-position:center;height:100%;width:100%;position:absolute;"></div>
+                                <div style="background-image: url('practitioner_registration/static/src/slider3.png'); background-size:cover;background-position:center;height:100%;width:100%;position:absolute;"></div>
                                 <div class="container d-flex flex-column justify-content-center h-100 position-relative pt-5" style="z-index:10;">
                                     <div class="row justify-content-end">
                                         <div class="col-lg-7 text-end">
