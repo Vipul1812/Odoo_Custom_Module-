@@ -14,7 +14,8 @@
     'data': [
         'views/practitioner_registration_template.xml',
         'views/practitioner_registration_menu.xml',
-        'views/home_template.xml'
+        'views/home_template.xml',
+        'views/about_us.xml'
     ],
     'installable': True,
     'application': True,

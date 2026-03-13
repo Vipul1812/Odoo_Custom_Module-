@@ -44,3 +44,8 @@ class PractitionerController(http.Controller):
 
         # Redirect back to home page after success
         return request.redirect('/')
+
+    @http.route('/aboutus', type='http', auth="public", website=True)
+    def about_page(self, **kwargs):
+        
+        return request.render('practitioner.about_template', {})

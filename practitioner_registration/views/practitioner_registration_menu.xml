@@ -1,20 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>
-
+    <data noupdate="1">
         <record id="menu_practitioner_registration" model="website.menu">
             <field name="name">Practitioner Registration</field>
             <field name="url">/practitioner/registration</field>
             <field name="parent_id" ref="website.main_menu"/>
-            <field name="sequence">50</field>
+            <field name="sequence" type="int">50</field>
         </record>
-
-        <record id="about_us_menu" model="website.menu">
-            <field name="name">About Us</field>
-            <field name="url">/aboutus</field>
-            <field name="parent_id" ref="website.main_menu"/>
-            <field name="sequence">60</field>
-        </record>
-
     </data>
 </odoo>
