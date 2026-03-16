@@ -1,16 +1,14 @@
 /** @odoo-module **/
 import { registry } from "@web/core/registry";
+import { memoize } from "@web/core/utils/functions";
 
-const dashboardService = {
-    dependencies: ["orm"],
-    start(env, { orm }) {
+const statisticsService = {
+    dependencies: ["rpc"],
+    start(env, { rpc }) {
         return {
-            async getOfferCount() {
-                // Fetches total count from the estate.property.offer model
-                return await orm.searchCount("estate.property.offer", []);
-            },
+            loadStatistics: memoize(() => rpc("/awesome_dashboard/statistics", {})),
         };
     },
 };
 
-registry.category("services").add("dashboard_stats", dashboardService);
+registry.category("services").add("awesome_dashboard.statistics", statisticsService);

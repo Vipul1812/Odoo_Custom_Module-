@@ -4,87 +4,108 @@
         <Layout display="display" class="'o_dashboard_layout bg-100'">
             <div class="o_dashboard_main overflow-auto p-4" style="height: calc(100vh - 50px);">
                 <t t-set-slot="layout-buttons">
-                    <button class="btn btn-danger me-2" t-on-click="openCustomerView">
-                        <i class="fa fa-users me-1"/> Customers
-                    </button>
-                    <button class="btn btn-info" t-on-click="openLeads">
-                        <i class="fa fa-area-chart me-1"/> Leads
+                    <t t-if="!state.disabledItems.includes('customers_btn')">
+                        <button class="btn btn-danger me-2" t-on-click="openCustomerView">
+                            <i class="fa fa-users me-1"/> Customers
+                        </button>
+                    </t>
+                    <t t-if="!state.disabledItems.includes('leads_btn')">
+                        <button class="btn btn-info me-2" t-on-click="openLeads">
+                            <i class="fa fa-area-chart me-1"/> Leads
+                        </button>
+                    </t>
+                    <!-- Settings Gear Button -->
+                    <button class="btn btn-outline-secondary" t-on-click="openConfiguration">
+                        <i class="fa fa-gear"/>
                     </button>
                 </t>
-                <div class="o_dashboard_topbar bg-white p-4 rounded-4 shadow-sm mb-4">
-                    <h5 class="fw-bold text-primary mb-4">
-                        <i class="fa fa-line-chart me-2"/>Live Business Data
-                    </h5>
-                    <div class="row g-3">
-                        <div class="col-md-4">
-                            <div class="bg-light p-3 rounded-3 text-center">
-                                <small class="text-muted text-uppercase fw-bold">New Orders</small>
-                                <h2 class="fw-bold text-success">
-                                    <t t-esc="state.statistics.nb_new_orders or 0"/>
-                                </h2>
+                <!-- Statistics Section -->
+                <t t-if="!state.disabledItems.includes('statistics')">
+                    <div class="o_dashboard_topbar bg-white p-4 rounded-4 shadow-sm mb-4">
+                        <h5 class="fw-bold text-primary mb-4">
+                            <i class="fa fa-line-chart me-2"/>Live Business Data
+                        </h5>
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <div class="bg-light p-3 rounded-3 text-center">
+                                    <small class="text-muted text-uppercase fw-bold">New Offers (Month)</small>
+                                    <h2 class="fw-bold text-success">
+                                        <t t-esc="state.statistics.nb_new_orders or 0"/>
+                                    </h2>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="bg-light p-3 rounded-3 text-center">
-                                <small class="text-muted text-uppercase fw-bold">Revenue</small>
-                                <h2 class="fw-bold text-primary">$
-                                    <t t-esc="state.statistics.total_amount or 0"/>
-                                </h2>
+                            <div class="col-md-4">
+                                <div class="bg-light p-3 rounded-3 text-center">
+                                    <small class="text-muted text-uppercase fw-bold">Total Revenue</small>
+                                    <h2 class="fw-bold text-primary">$
+                                        <t t-esc="state.statistics.total_amount or 0"/>
+                                    </h2>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="bg-light p-3 rounded-3 text-center">
-                                <small class="text-muted text-uppercase fw-bold">Cancelled</small>
-                                <h2 class="fw-bold text-danger">
-                                    <t t-esc="state.statistics.nb_cancelled_orders or 0"/>
-                                </h2>
+                            <div class="col-md-4">
+                                <div class="bg-light p-3 rounded-3 text-center">
+                                    <small class="text-muted text-uppercase fw-bold">Expired Offers</small>
+                                    <h2 class="fw-bold text-danger">
+                                        <t t-esc="state.statistics.nb_cancelled_orders or 0"/>
+                                    </h2>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="bg-white p-3 rounded-3 shadow-sm mb-4 d-flex justify-content-between align-items-center">
-                    <select class="form-select w-50" t-on-change="selectOffer">
-                        <option value="">Choose an Offer to Pin...</option>
-                        <t t-foreach="state.offers" t-as="offer" t-key="offer.id">
-                            <option t-att-value="offer.id">
-                                <t t-esc="offer.name"/>
-                            </option>
+                </t>
+                <!-- Offer Selector Section -->
+                <t t-if="!state.disabledItems.includes('selector')">
+                    <div class="bg-white p-3 rounded-3 shadow-sm mb-4">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <select class="form-select w-50" t-on-change="selectOffer">
+                                <option value="">Choose an Offer to Pin...</option>
+                                <t t-foreach="state.offers" t-as="offer" t-key="offer.id">
+                                    <option t-att-value="offer.id">
+                                        <t t-esc="offer.name"/>
+                                    </option>
+                                </t>
+                            </select>
+                            <button class="btn btn-primary px-4" t-on-click="addCard">Pin to Dashboard</button>
+                        </div>
+                        <t t-if="state.showWarning">
+                            <div class="text-danger mt-2 small">This offer is already pinned!</div>
                         </t>
-                    </select>
-                    <button class="btn btn-primary px-4" t-on-click="addCard">Pin to Dashboard</button>
-                </div>
-                <div class="row g-4 pb-5">
-                    <t t-foreach="state.cards" t-as="card" t-key="card.card_uid">
-                        <div class="col-lg-3 col-md-6">
-                            <div class="card shadow-sm h-100 border-0 overflow-hidden">
-                                <div class="o_card_image bg-light d-flex align-items-center justify-content-center" style="height: 160px; position: relative;">
-                                    <img t-att-src="card.image" 
-                                         class="w-100 h-100" 
-                                         style="object-fit: cover;"
-                                         onerror="this.src='/web/static/img/placeholder.png'"/>
-                                    <div class="position-absolute top-0 end-0 p-2">
-                                        <span class="badge bg-dark opacity-75">ID:
-                                            <t t-esc="card.id"/>
-                                        </span>
+                    </div>
+                </t>
+                <!-- Pinned Cards Section -->
+                <t t-if="!state.disabledItems.includes('cards')">
+                    <div class="row g-4 pb-5">
+                        <t t-foreach="state.cards" t-as="card" t-key="card.card_uid">
+                            <div class="col-lg-3 col-md-6">
+                                <div class="card shadow-sm h-100 border-0 overflow-hidden">
+                                    <div class="bg-light d-flex align-items-center justify-content-center" style="height: 160px; position: relative;">
+                                        <img t-att-src="card.image or '/web/static/img/placeholder.png'" 
+                                             class="w-100 h-100" 
+                                             style="object-fit: cover;"/>
+                                        <div class="position-absolute top-0 end-0 p-2">
+                                            <span class="badge bg-secondary opacity-75">ID:
+                                                <t t-esc="card.id"/>
+                                            </span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="card-body">
-                                    <h6 class="fw-bold text-truncate mb-3">
-                                        <t t-esc="card.name"/>
-                                    </h6>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <button class="btn btn-sm btn-outline-primary rounded-pill px-3" t-on-click="() => this.openDetails(card.id)">
-                                            Open File
-                                        </button>
-                                        <button class="btn btn-sm text-danger border-0" t-on-click="() => this.deleteCard(card.card_uid)">
-                                            <i class="fa fa-trash-o fa-lg"/>
-                                        </button>
+                                    <div class="card-body">
+                                        <h6 class="fw-bold text-truncate mb-3">
+                                            <t t-esc="card.name"/>
+                                        </h6>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <button class="btn btn-sm btn-outline-primary rounded-pill px-3" t-on-click="() => this.openDetails(card.id)">
+                                                Open File
+                                            </button>
+                                            <button class="btn btn-sm text-danger border-0" t-on-click="() => this.deleteCard(card.card_uid)">
+                                                <i class="fa fa-trash-o fa-lg"/>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </t>
-                </div>
+                        </t>
+                    </div>
+                </t>
             </div>
         </Layout>
     </t>

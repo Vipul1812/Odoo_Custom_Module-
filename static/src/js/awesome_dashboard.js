@@ -4,6 +4,8 @@ import { registry } from "@web/core/registry";
 import { Component, useState, onWillStart } from "@odoo/owl";
 import { Layout } from "@web/search/layout";
 import { useService } from "@web/core/utils/hooks";
+import { ConfigDialog } from "./ConfigDialog.js"; 
+import { browser } from "@web/core/browser/browser";
 
 export class AwesomeDashboard extends Component {
     static template = "awesome_dashboard";
@@ -11,93 +13,126 @@ export class AwesomeDashboard extends Component {
 
     setup() {
         this.orm = useService("orm");
-        this.rpc = useService("rpc");
         this.actionService = useService("action");
+        this.statisticsService = useService("awesome_dashboard.statistics");
+        this.dialog = useService("dialog");
+
+        
+        this.items = [
+            { id: "statistics", name: "Live Business Data" },
+            { id: "selector", name: "Offer Pinner Tool" }, 
+            { id: "cards", name: "Pinned Cards List" },
+            { id: "leads_btn", name: "Quick Leads Access" },
+            { id: "customers_btn", name: "Quick Customers Access" },
+        ];
+
+        const savedConfig = browser.localStorage.getItem("disabledDashboardItems");
 
         this.state = useState({
             offers: [],
             selectedOffer: null,
             cards: [],
-            statistics: {}
+            statistics: {},
+            showWarning: false,
+            loading: true,
+            disabledItems: savedConfig ? JSON.parse(savedConfig) : [],
         });
 
         this.display = {
-            controlPanel: { "top-left": true, "top-right": true },
+            controlPanel: { "top-left": true, "top-right": true , "bottom-left": true, "bottom-right": true },
         };
 
         onWillStart(async () => {
-            // 1. Fetch offers from the model method we updated above
             this.state.offers = await this.orm.call(
                 "estate.property.offer",
                 "get_offers_for_dashboard",
                 []
             );
 
-            // 2. Fetch statistics from your Python controller
-            this.state.statistics = await this.rpc("/awesome_dashboard/statistics");
+            this.state.statistics = await this.statisticsService.loadStatistics();
 
-            // 3. Load pinned cards
-            const savedCards = localStorage.getItem("dashboard_cards");
+            // FIX: Use browser.localStorage for consistency
+            const savedCards = browser.localStorage.getItem("dashboard_cards");
             if (savedCards) {
-                this.state.cards = JSON.parse(savedCards);
+                try {
+                    this.state.cards = JSON.parse(savedCards);
+                } catch {
+                    this.state.cards = [];
+                }
             }
+
+            this.state.loading = false;
         });
     }
 
-    openLeads(){
+    openConfiguration() {
+        this.dialog.add(ConfigDialog, {
+            items: this.items,
+            disabledItems: this.state.disabledItems,
+            onUpdateConfiguration: (newDisabledItems) => {
+                this.state.disabledItems = newDisabledItems;
+                browser.localStorage.setItem("disabledDashboardItems", JSON.stringify(newDisabledItems));
+            },
+        });
+    }
+
+    openLeads() {
         this.actionService.doAction({
             type: "ir.actions.act_window",
             res_model: "estate.property.offer",
             views: [[false, "kanban"], [false, "form"]],
-            target: "current",
-        }); 
+        });
     }
 
     openCustomerView() {
         this.actionService.doAction({
             type: "ir.actions.act_window",
             res_model: "estate.property.offer",
-            views: [[false, "tree"], [false, "form"]],
-            target: "current",
+            views: [[false, "list"], [false, "form"]],
         });
-
     }
 
     selectOffer(ev) {
-        const offerId = parseInt(ev.target.value);
-        this.state.selectedOffer = this.state.offers.find(o => o.id === offerId);
+        const id = Number(ev.target.value);
+        this.state.selectedOffer = this.state.offers.find(o => o.id === id);
     }
 
     addCard() {
-        if (!this.state.selectedOffer) return;
-        // Check if card already exists to avoid duplicates
-        if (!this.state.cards.find(c => c.id === this.state.selectedOffer.id)) {
-            this.state.cards.push({
-                ...this.state.selectedOffer,
-                card_uid: Date.now()
-            });
-            this.saveCards();
+        const selected = this.state.selectedOffer;
+        if (!selected) return;
+
+        const duplicate = this.state.cards.some(c => c.id === selected.id);
+        if (duplicate) {
+            this.state.showWarning = true;
+            return;
         }
+
+        this.state.cards.push({
+            ...selected,
+            card_uid: Date.now(),
+        });
+
+        this.saveCards();
+        this.state.showWarning = false;
     }
 
-    deleteCard(cardUid) {
-        this.state.cards = this.state.cards.filter(c => c.card_uid !== cardUid);
+    deleteCard(uid) {
+        this.state.cards = this.state.cards.filter(c => c.card_uid !== uid);
         this.saveCards();
     }
 
     saveCards() {
-        localStorage.setItem("dashboard_cards", JSON.stringify(this.state.cards));
+        browser.localStorage.setItem("dashboard_cards", JSON.stringify(this.state.cards));
     }
 
-    async openDetails(offerId) {
+    async openDetails(id) {
         await this.actionService.doAction({
             type: "ir.actions.act_window",
             res_model: "estate.property.offer",
-            res_id: offerId,
+            res_id: id,
             views: [[false, "form"]],
             target: "current",
         });
     }
 }
-
-registry.category("actions").add("awesome_dashboard", AwesomeDashboard);
+registry.category("actions").add("AwesomeDashboard", AwesomeDashboard);

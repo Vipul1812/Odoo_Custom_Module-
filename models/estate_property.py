@@ -260,16 +260,22 @@ class EstatePropertyOffer(models.Model):
     
     @api.model
     def get_offers_for_dashboard(self):
-
+        
         offers = self.search([])
+        return [{
+            "id": offer.id,
+            "name": offer.owner_id.name or f"Offer #{offer.id}",
+            "image": f"/web/image/estate.property.offer/{offer.id}/image_file" if offer.image_file else False
+        } for offer in offers]
+        # offers = self.search([])
 
-        data = []
+        # data = []
 
-        for offer in offers:
-            data.append({
-                "id": offer.id,
-                "name": offer.owner_id.name,
-                "image": f"/web/image/estate.property.offer/{offer.id}/image_file"
-            })
+        # for offer in offers:
+        #     data.append({
+        #         "id": offer.id,
+        #         "name": offer.owner_id.name,
+        #         "image": f"/web/image/estate.property.offer/{offer.id}/image_file"
+        #     })
 
-        return data
+        # return data
