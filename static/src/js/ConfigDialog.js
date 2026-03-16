@@ -34,3 +34,4 @@ export class ConfigDialog extends Component {
         this.props.close();
     }
 }
+

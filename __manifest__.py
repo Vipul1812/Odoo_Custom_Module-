@@ -50,6 +50,8 @@
         'mycompany_custom/static/src/js/dashboard_service.js', 
         'mycompany_custom/static/src/js/ConfigDialog.js',
         'mycompany_custom/static/src/xml/ConfigDialog.xml',
+        'mycompany_custom/static/src/js/systray.js',
+        'mycompany_custom/static/src/xml/systray.xml'
     ],
  
   
