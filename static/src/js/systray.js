@@ -4,9 +4,11 @@ import { registry } from "@web/core/registry";
 
 import { Component, useState, useExternalListener } from "@odoo/owl";
 import { useService } from "@web/core/utils/hooks"; 
+import { ClickerClientAction } from "./dashboard_service.js";
 
 export class Clicker extends Component {
     static template = "ClickerTemplate";
+    static components = { ClickerClientAction };
     
     setup() {
         this.state = useState({ count: 0 });

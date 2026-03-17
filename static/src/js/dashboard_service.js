@@ -3,6 +3,9 @@ import { registry } from "@web/core/registry";
 import { memoize } from "@web/core/utils/functions";
 import { Component , } from "@odoo/owl";
 import { useService } from "@web/core/utils/hooks";
+import { useclicker } from "./clicker.js";
+import { humanNumber } from "@web/core/utils/numbers";
+
 
 
 const statisticsService = {
@@ -17,13 +20,13 @@ const statisticsService = {
 registry.category("services").add("awesome_dashboard.statistics", statisticsService);
 
 
-class ClickerClientAction extends Component {
+export class ClickerClientAction extends Component {
     static template = "ClickerClientTemplate";
     static props = ['*'];
 
     setup() {
         this.action = useService("action");
-        
+        this.state = useclicker();
     }
 
     openFormView(){
@@ -33,6 +36,15 @@ class ClickerClientAction extends Component {
             views: [[false, "form"]],
             target: "new",
         });
+    }
+
+    increment(){
+        this.state.counter += 400 ;
+        console.log(this.state.counter);
+    }
+
+    get humanCount(){
+        return humanNumber(this.state.counter , {decimal: 1 });
     }
     
 }
