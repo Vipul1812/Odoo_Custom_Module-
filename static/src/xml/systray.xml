@@ -1,44 +1,57 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates xml:space="preserve">
+    
     <t t-name="ClickerTemplate" owl="1">
         <div class="o_nav_entry">
-            Clicks: <t t-esc="state.count"/>
+            Clicks: <t t-esc="state.counter"/>
             <button class="btn btn-secondary" t-on-click="increment">
                 <i class="fa fa-sm fa-snowflake-o"></i>
             </button>
         </div>
-
         <div class="o_client_logo">
             <button class="btn btn-info" t-on-click="opentree">
                 Open External Click
             </button>
         </div>
     </t>
+    
+    
+    <t t-name="ClickValueTemplate">
+        <span t-att-data-tooltip="props.value">
+            <t t-esc="humanCount"/>
+        </span>
+    </t>
 
-
-
-     <t t-name="ClickerClientTemplate" owl="1">
+    
+    <t t-name="ClickerClientTemplate" owl="1">
         <div class="p-5 text-center">
-            <h1>Welcome to the Client Action!</h1>
-            <p>This was opened from the systray clicker.</p>
+            <h1>Welcome to the Clicker Game!</h1>
+            
             <p>
                 Counter: <t t-esc="state.counter"/>
                 <button class="btn btn-primary" t-on-click="increment">
-                    Click Me
+                    Click Me (+400)
                 </button>
             </p>   
-            <p>
-                Human Readable Counter:
-                <span t-att-data-tooltip="state.counter" t-esc="humanCount"/>
-                
 
+            <p>
+                Human Readable: <ClickValue value="state.counter"/>
             </p>
 
-            <button class="btn btn-primary" t-on-click="openFormView">
+            
+            <div t-if="state.level >= 1" class="mt-4 p-3 border bg-light">
+                <h3> Robot Shop</h3>
+                <p>Bots:</p>
+                <button class="btn btn-success" 
+                        t-on-click="buyRobot" 
+                        t-att-disabled="state.counter &lt; 1000">
+                    Buy Robot (1000 Clicks)
+                </button>
+            </div>
+
+            <button class="btn btn-secondary mt-3" t-on-click="openFormView">
                 Open Form View
             </button>
         </div>
     </t>
-
-
 </templates>

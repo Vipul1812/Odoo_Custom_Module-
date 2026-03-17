@@ -1,5 +1,10 @@
 {
   "python.analysis.extraPaths": [
     "/home/in2it/Desktop/workspace/community/odoo17/odoo"
-  ]
+  ],
+  "python.testing.pytestArgs": [
+    "views"
+  ],
+  "python.testing.unittestEnabled": false,
+  "python.testing.pytestEnabled": true
 }
