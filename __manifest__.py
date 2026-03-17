@@ -33,25 +33,29 @@
     ],
 
      'assets': {
-        'web.assets_backend': [
-            '/mycompany_custom/static/src/js/button_pos.js',
-            '/mycompany_custom/static/src/xml/pos_button.xml',
-            '/mycompany_custom/static/src/js/dashboard.js',
-            '/mycompany_custom/static/src/xml/dashboard.xml',
-            '/mycompany_custom/static/src/js/card.js',
-            # '/mycompany_custom/static/src/js/offer_state_selection.js',
-            # '/mycompany_custom/static/src/scss/offer_state_selection.scss',
-            # '/mycompany_custom/static/src/xml/offer_state_selection.xml',
-             '/mycompany_custom/static/src/js/custom_trial.js',
-             '/mycompany_custom/static/src/scss/custom_trial.scss',
-             '/mycompany_custom/static/src/xml/custom_trial.xml',
-             '/mycompany_custom/static/src/js/awesome_dashboard.js',
-             '/mycompany_custom/static/src/xml/awesome_dashboard.xml',
-             '/mycompany_custom/static/src/scss/awesome_dashboard.scss',
-             '/mycompany_custom/static/src/js/dashboard_service.js',
-             
-        ],
-    },
+         
+    'web.assets_backend': [
+        'mycompany_custom/static/src/js/awesome_dashboard.js',
+        'mycompany_custom/static/src/xml/awesome_dashboard.xml',
+        'mycompany_custom/static/src/scss/awesome_dashboard.scss',
+        # Move these here if they are only used in the dashboard:
+        'mycompany_custom/static/src/js/dashboard.js',
+        'mycompany_custom/static/src/xml/dashboard.xml',
+        'mycompany_custom/static/src/js/card.js',
+        'mycompany_custom/static/src/js/button_pos.js',
+        'mycompany_custom/static/src/xml/pos_button.xml',
+        'mycompany_custom/static/src/js/custom_trial.js',
+        'mycompany_custom/static/src/scss/custom_trial.scss',
+        'mycompany_custom/static/src/xml/custom_trial.xml', 
+        'mycompany_custom/static/src/js/dashboard_service.js', 
+        'mycompany_custom/static/src/js/ConfigDialog.js',
+        'mycompany_custom/static/src/xml/ConfigDialog.xml',
+        'mycompany_custom/static/src/js/systray.js',
+        'mycompany_custom/static/src/xml/systray.xml'
+    ],
+ 
+  
+},
 
 
     "installable": True,

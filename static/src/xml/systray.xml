@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="ClickerTemplate" owl="1">
+        <div class="o_nav_entry">
+            Clicks: <t t-esc="state.count"/>
+            <button class="btn btn-secondary" t-on-click="increment">
+                <i class="fa fa-sm fa-snowflake-o"></i>
+            </button>
+        </div>
+
+        <div class="o_client_logo">
+            <button class="btn btn-info" t-on-click="opentree">
+                Open External Click
+            </button>
+        </div>
+    </t>
+
+
+
+     <t t-name="ClickerClientTemplate" owl="1">
+        <div class="p-5 text-center">
+            <h1>Welcome to the Client Action!</h1>
+            <p>This was opened from the systray clicker.</p>
+
+            <button class="btn btn-primary" t-on-click="openFormView">
+                Open Form View
+            </button>
+        </div>
+    </t>
+</templates>
