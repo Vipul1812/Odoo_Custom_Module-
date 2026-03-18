@@ -28,7 +28,7 @@ class PractitionerController(http.Controller):
 
     @http.route('/registration/submit', type='http', auth="public", methods=['POST'], website=True, csrf=True)
     def practitioner_registration_submit(self, **post):
-        # 1. Create Lead (same as your current code)
+        # 1. Create Lead
         lead_values = {
             'name': post.get('name'),
             'contact_name': post.get('name'),
@@ -42,11 +42,10 @@ class PractitionerController(http.Controller):
         }
         new_lead = request.env['crm.lead'].sudo().create(lead_values)
 
-        # 2. Extract dynamic licensure records from the hidden inputs
-        # We look for keys starting with 'lic_file_'
+        # 2. Extract dynamic licensure records
         for key in post.keys():
             if key.startswith('lic_file_'):
-                suffix = key.replace('lic_file_', '') # Get the 'lic_1' part
+                suffix = key.replace('lic_file_', '')
                 name_key = 'lic_name_' + suffix
                 
                 file_obj = post.get(key)
@@ -60,7 +59,9 @@ class PractitionerController(http.Controller):
                         'crm_lead_id': new_lead.id,
                     })
 
-        return request.render('website.contactus_thanks')
+        # Redirect to home with a success message parameter
+        return request.redirect('/?registration_success=1')
+
     
     @http.route('/mlp', type='http', auth="public", website=True)
     def mlp_registration(self, **kwargs):

@@ -2,123 +2,153 @@
 <odoo>
     <template id="registration_page_template" name="Practitioner Registration">
         <t t-call="website.layout">
-            <div id="wrap" class="oe_structure oe_empty">
-                <section class="s_title pt32 pb32">
+            <!-- Background wrapper for the 'Sheet' effect -->
+            <div id="wrap" class="oe_structure oe_empty bg-100" style="background-color: #1580eb;">
+                
+                <!-- Refined Header -->
+                <section class="s_title pt48 pb24">
                     <div class="container text-center">
-                        <h1 class="display-4">HPCSA Practitioner Registration</h1>
-                        <p class="lead">Please provide your professional details below.</p>
+                        <h1 class="display-5 fw-bold text-primary">HPCSA Practitioner Registration</h1>
+                        <p class="text-muted">Please provide your professional details below to complete your profile.</p>
                     </div>
                 </section>
 
                 <div class="container pb64">
-                    <form action="/registration/submit" method="post" enctype="multipart/form-data" class="container-fluid mt-3" id="practitioner_registration_form">
-                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-                        
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Full Name *</label>
-                                <input type="text" class="form-control" name="name" required="1"/>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Email *</label>
-                                <input type="email" class="form-control" name="email" required="1"/>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Phone Number</label>
-                                <input type="tel" class="form-control" name="phone"/>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">HPCSA Student Reg Number</label>
-                                <input type="text" class="form-control" name="registration_number"/>
-                            </div>
+                    <div class="row justify-content-center">
+                        <div class="col-lg-10">
+                            
+                            <!-- The 'Sheet' Container -->
+                            <div class="card shadow-sm border-0 mb-4 p-4 p-md-5 bg-white rounded-3">
+                                <form action="/registration/submit" method="post" enctype="multipart/form-data" id="practitioner_registration_form">
+                                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                    
+                                    <!-- Personal Details Section -->
+                                    <div class="row mb-4">
+                                        <div class="col-12 border-start border-primary border-4 mb-3 ps-3" style="background-color: #ffffff;">
+                                            <h4 class="mb-0">Basic Information</h4>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label fw-bold small">Full Name <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control shadow-none border-2" name="name" required="1" placeholder="Enter your full name"/>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label fw-bold small">Email Address <span class="text-danger">*</span></label>
+                                            <input type="email" class="form-control shadow-none border-2" name="email" required="1" placeholder="email@example.com"/>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label fw-bold small">Phone Number</label>
+                                            <input type="tel" class="form-control shadow-none border-2" name="phone" placeholder="+27..."/>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label fw-bold small">HPCSA Student Reg Number</label>
+                                            <input type="text" class="form-control shadow-none border-2" name="registration_number" placeholder="Registration No."/>
+                                        </div>
 
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Profession/Category</label>
-                                <select name="profession_category_id" class="form-select">
-                                    <option value="">Select...</option>
-                                    <t t-foreach="professions" t-as="prof">
-                                        <option t-att-value="prof.id"><t t-esc="prof.name"/></option>
-                                    </t>
-                                </select>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Board Type</label>
-                                <select name="board_type_id" class="form-select">
-                                    <option value="">Select...</option>
-                                    <t t-foreach="boards" t-as="board">
-                                        <option t-att-value="board.id"><t t-esc="board.name"/></option>
-                                    </t>
-                                </select>
-                            </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label fw-bold small">Profession/Category</label>
+                                            <select name="profession_category_id" class="form-select shadow-none border-2">
+                                                <option value="">Select Category...</option>
+                                                <t t-foreach="professions" t-as="prof">
+                                                    <option t-att-value="prof.id"><t t-esc="prof.name"/></option>
+                                                </t>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label fw-bold small">Board Type</label>
+                                            <select name="board_type_id" class="form-select shadow-none border-2">
+                                                <option value="">Select Board...</option>
+                                                <t t-foreach="boards" t-as="board">
+                                                    <option t-att-value="board.id"><t t-esc="board.name"/></option>
+                                                </t>
+                                            </select>
+                                        </div>
 
-                            <div class="col-md-12 mb-4 mt-2">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" name="rwpos_approval" id="rwpos"/>
-                                    <label class="form-check-label" for="rwpos">RWOPS Approval</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" name="sessional_contract" id="sessional"/>
-                                    <label class="form-check-label" for="sessional">Sessional Contract</label>
-                                </div>
-                            </div>
-
-                            <div class="col-12 mb-4">
-                                <h4 class="border-bottom pb-2">Licensure Details</h4>
-                                
-                                <div class="row align-items-end" id="licensure_input_row">
-                                    <div class="col-md-5 mb-3">
-                                        <label class="form-label fw-bold">Licensure Name</label>
-                                        <input type="text" id="temp_lic_name" class="form-control" placeholder="e.g. Annual Practising Certificate"/>
+                                        <div class="col-md-12 mb-4 mt-2">
+                                            <div class="form-check form-check-inline p-2 border rounded me-3 bg-light px-4">
+                                                <input class="form-check-input ms-0" type="checkbox" name="rwpos_approval" id="rwpos"/>
+                                                <label class="form-check-label fw-bold ms-2" for="rwpos">RWOPS Approval</label>
+                                            </div>
+                                            <div class="form-check form-check-inline p-2 border rounded bg-light px-4">
+                                                <input class="form-check-input ms-0" type="checkbox" name="sessional_contract" id="sessional"/>
+                                                <label class="form-check-label fw-bold ms-2" for="sessional">Sessional Contract</label>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-md-5 mb-3">
-                                        <label class="form-label fw-bold">Upload Document</label>
-                                        <input type="file" id="temp_lic_file" class="form-control" accept="application/pdf,image/*"/>
+
+                                    <!-- Licensure Details Section -->
+                                    <div class="col-12 mb-5">
+                                        <div class="col-12 border-start border-primary border-4 mb-3 ps-3">
+                                            <h4 class="mb-0">Licensure Details</h4>
+                                        </div>
+                                        
+                                        <div class="row align-items-end g-2 p-3 bg-light rounded" id="licensure_input_row">
+                                            <div class="col-md-5">
+                                                <label class="form-label fw-bold small text-muted">Licensure Name</label>
+                                                <input type="text" id="temp_lic_name" class="form-control" placeholder="e.g. Annual Practising Certificate"/>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <label class="form-label fw-bold small text-muted">Upload Document</label>
+                                                <input type="file" id="temp_lic_file" class="form-control" accept="application/pdf,image/*"/>
+                                            </div>
+                                            <div class="col-md-2 mt-3 mt-md-0">
+                                                <button type="button" class="btn btn-dark w-100 fw-bold" id="add_licensure_row">
+                                                    <i class="fa fa-plus-circle me-1"/> ADD
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <table class="table table-hover mt-3 d-none border" id="licensure_table">
+                                            <thead class="table-light text-uppercase small fw-bold">
+                                                <tr>
+                                                    <th class="ps-3">Name</th>
+                                                    <th>File</th>
+                                                    <th class="text-center">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="licensure_tbody" class="border-top-0">
+                                                <!-- Dynamic Rows -->
+                                            </tbody>
+                                        </table>
+
+                                        <div id="hidden_files_container" style="display:none;"></div>
                                     </div>
-                                    <div class="col-md-2 mb-3">
-                                        <button type="button" class="btn btn-secondary w-100" id="add_licensure_row">
-                                            <i class="fa fa-plus me-1"/> Add
+
+                                    <!-- Qualifications Section -->
+                                    <div class="col-12 mb-5">
+                                        <div class="col-12 border-start border-primary border-4 mb-3 ps-3">
+                                            <h4 class="mb-0">Academic Qualifications</h4>
+                                        </div>
+                                        <div class="table-responsive rounded border">
+                                            <table class="table mb-0" id="qualifications_table">
+                                                <thead class="table-light text-uppercase small fw-bold">
+                                                    <tr>
+                                                        <th class="ps-3 border-0">Degree / Title</th>
+                                                        <th class="border-0" style="width: 250px;">Year Obtained</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="ps-3">
+                                                            <input type="text" name="qual_name_1" class="form-control border-0 shadow-none" placeholder="e.g. MBChB"/>
+                                                        </td>
+                                                        <td class="pe-3">
+                                                            <input type="text" name="qual_year_1" class="form-control border-0 shadow-none" placeholder="2024"/>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <div class="text-center pt-3 border-top">
+                                        <button type="submit" class="btn btn-primary btn-lg px-5 py-3 rounded-pill fw-bold shadow">
+                                            <i class="fa fa-check-circle me-2"/> SUBMIT REGISTRATION
                                         </button>
                                     </div>
-                                </div>
-
-                                <table class="table table-sm mt-3 d-none" id="licensure_table">
-                                    <thead>
-                                        <tr class="table-light">
-                                            <th>Name</th>
-                                            <th>File</th>
-                                            <th class="text-center">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="licensure_tbody">
-                                        </tbody>
-                                </table>
-
-                                <div id="hidden_files_container" style="display:none;"></div>
-                            </div>
-
-                            <div class="col-12 mb-4">
-                                <h4 class="border-bottom pb-2">Qualifications</h4>
-                                <table class="table table-sm" id="qualifications_table">
-                                    <thead>
-                                        <tr>
-                                            <th>Degree/Title</th>
-                                            <th>Year</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><input type="text" name="qual_name_1" class="form-control" placeholder="e.g. MBChB"/></td>
-                                            <td><input type="text" name="qual_year_1" class="form-control" placeholder="2024"/></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                                </form>
+                            </div> <!-- End of Card -->
                         </div>
-
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-primary btn-lg px-5">Submit Registration</button>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </t>

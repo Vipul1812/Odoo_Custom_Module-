@@ -3,6 +3,8 @@
     <template id="mlp_template" name="MLP Registration">
         <t t-call="website.layout">
             <div id="wrap" class="oe_structure oe_empty">
+                
+                <!-- 1. Header Section -->
                 <section class="s_title pt48 pb48 text-white" style="background-color: #004C98 !important; border-bottom-left-radius: 50px; border-bottom-right-radius: 50px;">
                     <div class="container text-center">
                         <h1 class="display-3 fw-bold">Maintenance of Licensure Programme</h1>
@@ -10,70 +12,99 @@
                         <hr class="s_hr_sm w-25 mx-auto border-white"/>
                     </div>
                 </section>
+
+                <!-- 2. Main Content & Sidebar -->
                 <section class="s_text_block pt48 pb64 bg-100">
                     <div class="container">
                         <div class="row">
+                            
+                            <!-- Left: Informational Content -->
                             <div class="col-lg-8">
-                                <div class="p-4 bg-white rounded shadow-sm">
+                                <div class="p-4 bg-white rounded shadow-sm h-100">
                                     <p class="text-justify" style="line-height: 1.8;">
-                                        The Health Professions Council of South Africa (
-                                        <strong>HPCSA</strong>) implements the Continuing Professions Development (CPD) programme according to section 26 of the Health Professions Act of 1974. Following stakeholder consultation, the HPCSA is developing a system to enhance the current CPD programme, assisting health practitioners in demonstrating competence linked to patient outcomes.
+                                        The Health Professions Council of South Africa (<strong>HPCSA</strong>) implements the Continuing Professions Development (CPD) programme according to section 26 of the Health Professions Act of 1974. Following stakeholder consultation, the HPCSA is developing a system to enhance the current CPD programme, assisting health practitioners in demonstrating competence linked to patient outcomes.
                                     </p>
                                     <p class="text-justify" style="line-height: 1.8;">
-                                        The
-                                        <strong>MOL (Maintenance of Licensure)</strong> is supported by three volunteer boards:
-                                        <em>Occupational Therapy, Medical Orthotics, Prosthetics and Arts Therapy (OCP)</em>,
-                                        <em>Medical Technology (MTB)</em>, and the
+                                        The <strong>MOL (Maintenance of Licensure)</strong> is supported by three volunteer boards: 
+                                        <em>Occupational Therapy, Medical Orthotics, Prosthetics and Arts Therapy (OCP)</em>, 
+                                        <em>Medical Technology (MTB)</em>, and the 
                                         <em>Medical, Dental and Medical Sciences Board (MDB)</em>.
                                     </p>
-                                    <div class="alert alert-info mt32 mb-0">
-                                        <i class="fa fa-info-circle mr-2"/> The HPCSA will keep stakeholders updated on the progress of the development.
+                                    <div class="alert alert-info mt32 mb-0 border-0 shadow-sm">
+                                        <i class="fa fa-info-circle me-2"/> The HPCSA will keep stakeholders updated on the progress of the development.
                                     </div>
                                 </div>
                             </div>
+                            
+                            <!-- Right: Sidebar with Document List -->
                             <div class="col-lg-4">
-                                    <div class="card border-0 shadow-sm overflow-hidden">
-                                        <button type="button" 
-                                                class="card-header w-100 text-white text-center border-0 p-3" 
-                                                style="background-color: #004C98 !important; cursor: pointer; display: block;"
-                                                data-bs-toggle="collapse" 
-                                                data-bs-target="#collapseDocuments" 
-                                                aria-expanded="false" 
-                                                aria-controls="collapseDocuments">
-                                            <h4 class="mb-0">
-                                                <i class="fa fa-file-text-o mr-2"/> Important Documents
-                                                <i class="fa fa-chevron-down ml-2 small"/>
-                                            </h4>
-                                        </button>
+                                <div class="card border-0 shadow-sm overflow-hidden mt-4 mt-lg-0">
+                                    
+                                    <!-- Accordion Header -->
+                                    <button type="button" 
+                                            class="card-header w-100 text-white text-center border-0 p-3 shadow-none" 
+                                            style="background-color: #004C98 !important; cursor: pointer; display: block;"
+                                            data-bs-toggle="collapse" 
+                                            data-bs-target="#collapseDocuments"
+                                            aria-expanded="false" 
+                                            aria-controls="collapseDocuments">
+                                        <h4 class="mb-0 text-white">
+                                            <i class="fa fa-file-text-o me-2"/> Important Documents
+                                            <!-- FIXED: Added docChevron ID for the script to find it -->
+                                            <i id="docChevron" class="fa fa-chevron-down ms-2 small" style="transition: transform 0.4s ease;"/>
+                                        </h4>
+                                    </button>
 
-                                        <div id="collapseDocuments" class="collapse">
-                                            <div class="card-body bg-white border-top">
-                                                <ul class="list-unstyled mb-0">
-                                                    <li class="mb-2">
-                                                        <a href="#" class="btn btn-block text-left d-flex justify-content-between align-items-center" 
-                                                        style="border: 1px solid #004C98; color: #004C98;">
-                                                            <span><i class="fa fa-download mr-2"/> MOL Framework</span>
-                                                            <i class="fa fa-chevron-right small text-muted"/>
-                                                        </a>
-                                                    </li>
-                                                    <li class="mb-2">
-                                                        <a href="#" class="btn btn-block text-left d-flex justify-content-between align-items-center" 
-                                                        style="border: 1px solid #004C98; color: #004C98;">
-                                                            <span><i class="fa fa-download mr-2"/> MOL Guidelines</span>
-                                                            <i class="fa fa-chevron-right small text-muted"/>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#" class="btn btn-block text-left d-flex justify-content-between align-items-center" 
-                                                        style="border: 1px solid #004C98; color: #004C98;">
-                                                            <span><i class="fa fa-question-circle mr-2"/> MOL FAQs</span>
-                                                            <i class="fa fa-chevron-right small text-muted"/>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
+                                    <!-- Collapsible Document Body -->
+                                    <div id="collapseDocuments" class="collapse">
+                                        <div class="card-body bg-white border-top">
+                                            <ul class="list-unstyled mb-0">
+                                                <li class="mb-2">
+                                                    <a href="#" class="btn w-100 text-start d-flex justify-content-between align-items-center" 
+                                                       style="border: 1px solid #004C98; color: #004C98;">
+                                                        <span><i class="fa fa-download me-2"/> MOL Framework</span>
+                                                        <i class="fa fa-chevron-right small text-muted"/>
+                                                    </a>
+                                                </li>
+                                                <li class="mb-2">
+                                                    <a href="#" class="btn w-100 text-start d-flex justify-content-between align-items-center" 
+                                                       style="border: 1px solid #004C98; color: #004C98;">
+                                                        <span><i class="fa fa-download me-2"/> MOL Guidelines</span>
+                                                        <i class="fa fa-chevron-right small text-muted"/>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="btn w-100 text-start d-flex justify-content-between align-items-center" 
+                                                       style="border: 1px solid #004C98; color: #004C98;">
+                                                        <span><i class="fa fa-question-circle me-2"/> MOL FAQs</span>
+                                                        <i class="fa fa-chevron-right small text-muted"/>
+                                                    </a>
+                                                </li>
+                                            </ul>
                                         </div>
                                     </div>
+                                    
+                                    <!-- 3. Automated JavaScript -->
+                                    <script type="text/javascript">
+                                        (function ($) {
+                                            $(function () {
+                                                setTimeout(function() {
+                                                    const $docEl = $('#collapseDocuments');
+                                                    if ($docEl.length) {
+                                                        // Odoo jQuery wrapper for Bootstrap 5 'show'
+                                                        $docEl.collapse('show');
+                                                        
+                                                        // Target icon by ID and rotate it
+                                                        const $chevron = $('#docChevron');
+                                                        if ($chevron.length) {
+                                                            $chevron.css('transform', 'rotate(180deg)');
+                                                        }
+                                                    }
+                                                }, 5000);
+                                            });
+                                        })(jQuery);
+                                    </script>
+
                                 </div>
                             </div>
                         </div>
